@@ -1,8 +1,8 @@
 <?php
 
-namespace Brickspace\Shopify\Settings;
+namespace VendorName\Skeleton\Settings;
 
-use Brickspace\Shopify\Actions\SkeletonAction;
+use VendorName\Skeleton\Actions\SkeletonAction;
 use Helix\Lego\Settings\AppSettings;
 
 class SkeletonSettings extends AppSettings

@@ -1,6 +1,6 @@
 <?php
 
-namespace Brickspace\Shopify\Actions;
+namespace VendorName\Skeleton\Actions;
 
 use Helix\Lego\Apps\Actions\Action;
 

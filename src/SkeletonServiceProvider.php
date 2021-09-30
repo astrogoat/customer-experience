@@ -2,7 +2,7 @@
 
 namespace VendorName\Skeleton;
 
-use Brickspace\Shopify\Settings\SkeletonSettings;
+use VendorName\Skeleton\Settings\SkeletonSettings;
 use Helix\Lego\Apps\App;
 use Helix\Lego\LegoManager;
 use Spatie\LaravelPackageTools\Package;
@@ -28,8 +28,8 @@ class SkeletonServiceProvider extends PackageServiceProvider
                         // ])
                         ->settings(SkeletonSettings::class);
                 })
-                ->addRoutesToLego(__DIR__.'/../routes/backend.php.php')
-                ->addRoutesToStorefront(__DIR__.'/../routes/frontend.php.php')
+                ->addRoutesToBackend(__DIR__.'/../routes/backend.php')
+                ->addRoutesToFrontend(__DIR__.'/../routes/frontend.php')
                 ->addMigrations([
                     __DIR__ . '/../database/migrations',
                     __DIR__ . '/../database/migrations/settings',
