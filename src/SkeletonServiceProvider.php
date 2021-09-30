@@ -2,12 +2,43 @@
 
 namespace VendorName\Skeleton;
 
+use Brickspace\Shopify\Settings\SkeletonSettings;
+use Helix\Lego\Apps\App;
+use Helix\Lego\LegoManager;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use VendorName\Skeleton\Commands\SkeletonCommand;
 
 class SkeletonServiceProvider extends PackageServiceProvider
 {
+    public function registeringPackage()
+    {
+        $this->callAfterResolving('lego', function (LegoManager $lego) {
+            $lego
+                ->registerApp(function (App $app) {
+                    return $app
+                        ->name('skeleton')
+                        // ->models([
+                        //     //
+                        // ])
+                        // ->resources([
+                        //     'css' => [
+                        //         '/vendor/skeleton/css/skeleton.css'
+                        //     ],
+                        // ])
+                        ->settings(SkeletonSettings::class);
+                })
+                ->addRoutesToLego(__DIR__.'/../routes/backend.php.php')
+                ->addRoutesToStorefront(__DIR__.'/../routes/frontend.php.php')
+                ->addMigrations([
+                    __DIR__ . '/../database/migrations',
+                    __DIR__ . '/../database/migrations/settings',
+                ]);
+
+            return $lego;
+        });
+    }
+
     public function configurePackage(Package $package): void
     {
         /*
