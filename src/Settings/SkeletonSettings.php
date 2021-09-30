@@ -2,8 +2,6 @@
 
 namespace Brickspace\Shopify\Settings;
 
-use Brickspace\Shopify\Actions\Connect;
-use Brickspace\Shopify\Actions\ImportProductsAction;
 use Brickspace\Shopify\Actions\SkeletonAction;
 use Helix\Lego\Settings\AppSettings;
 
@@ -26,7 +24,7 @@ class SkeletonSettings extends AppSettings
     //     return ['access_token'];
     // }
 
-    public function description() : string
+    public function description(): string
     {
         return 'Interact with Skeleton.';
     }
