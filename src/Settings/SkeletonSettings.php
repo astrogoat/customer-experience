@@ -2,8 +2,8 @@
 
 namespace VendorName\Skeleton\Settings;
 
-use VendorName\Skeleton\Actions\SkeletonAction;
 use Helix\Lego\Settings\AppSettings;
+use VendorName\Skeleton\Actions\SkeletonAction;
 
 class SkeletonSettings extends AppSettings
 {
