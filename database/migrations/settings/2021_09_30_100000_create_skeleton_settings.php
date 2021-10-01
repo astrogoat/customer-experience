@@ -2,7 +2,7 @@
 
 use Spatie\LaravelSettings\Migrations\SettingsMigration;
 
-class CreateShopifySettings extends SettingsMigration
+class CreateSkeletonSettings extends SettingsMigration
 {
     public function up(): void
     {

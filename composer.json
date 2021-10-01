@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "astrogoat/stratum": "dev-develop",
         "spatie/laravel-package-tools": "^1.4.3",
         "illuminate/contracts": "^8.37"
     },

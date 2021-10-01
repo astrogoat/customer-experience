@@ -142,7 +142,7 @@ foreach ($files as $file) {
         str_contains($file, 'src/Actions/SkeletonAction.php') => rename($file, './src/Actions/' . $className . 'Action.php'),
         str_contains($file, 'src/Settings/SkeletonSettings.php') => rename($file, './src/Settings/' . $className . 'Settings.php'),
         str_contains($file, 'database/migrations/create_skeleton_table.php.stub') => rename($file, './database/migrations/create_' . $packageSlugWithoutPrefix . '_table.php.stub'),
-        str_contains($file, 'database/migrations/settings/create_skeleton_settings_table.php.stub') => rename($file, './database/migrations/settings/create_' . $packageSlugWithoutPrefix . '_settings_table.php.stub'),
+        str_contains($file, 'database/migrations/settings/2021_09_30_100000_create_skeleton_settings.php') => rename($file, './database/migrations/settings/2021_09_30_100000_create_' . $packageSlugWithoutPrefix . '_settings.php'),
         str_contains($file, 'config/skeleton.php') => rename($file, './config/' . $packageSlugWithoutPrefix . '.php'),
         str_contains($file, 'public/css/skeleton.css') => rename($file, './public/css/' . $packageSlugWithoutPrefix . '.css'),
         default => [],
