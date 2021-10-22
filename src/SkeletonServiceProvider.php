@@ -17,7 +17,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
             return $app
                 ->name('skeleton')
                 ->settings(SkeletonSettings::class);
-            })
+        })
             ->addRoutesToBackend(__DIR__.'/../routes/backend.php')
             ->addRoutesToFrontend(__DIR__.'/../routes/frontend.php')
             ->addMigrations([
