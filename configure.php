@@ -101,7 +101,7 @@ $packageSlugWithoutPrefix = remove_prefix('laravel-', $packageSlug);
 
 $className = title_case($packageName);
 $className = ask('Class name', $className);
-$description = ask('Package description', "This is my package {$packageSlug}");
+$description = ask('Package description', "A {$className} app for Stratum");
 
 writeln('------');
 writeln("Author     : {$authorName} ({$authorUsername}, {$authorEmail})");
