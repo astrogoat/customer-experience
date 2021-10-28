@@ -13,14 +13,14 @@ class SkeletonServiceProvider extends PackageServiceProvider
     public function registerApp(App $app)
     {
         return $app
-                ->name('skeleton')
-                ->settings(SkeletonSettings::class)
-                ->migrations([
-                    __DIR__ . '/../database/migrations',
-                    __DIR__ . '/../database/migrations/settings',
-                ])
-                ->backendRoutes(__DIR__.'/../routes/backend.php')
-                ->frontendRoutes(__DIR__.'/../routes/frontend.php');
+            ->name('skeleton')
+            ->settings(SkeletonSettings::class)
+            ->migrations([
+                __DIR__ . '/../database/migrations',
+                __DIR__ . '/../database/migrations/settings',
+            ])
+            ->backendRoutes(__DIR__.'/../routes/backend.php')
+            ->frontendRoutes(__DIR__.'/../routes/frontend.php');
     }
 
     public function registeringPackage()
