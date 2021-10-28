@@ -6,14 +6,13 @@ use Helix\Lego\Apps\App;
 use Helix\Lego\LegoManager;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
 use VendorName\Skeleton\Settings\SkeletonSettings;
 
 class SkeletonServiceProvider extends PackageServiceProvider
 {
     public function registerApp(App $app)
     {
-            return $app
+        return $app
                 ->name('skeleton')
                 ->settings(SkeletonSettings::class)
                 ->migrations([
