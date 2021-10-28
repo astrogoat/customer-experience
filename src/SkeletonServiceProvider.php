@@ -27,16 +27,12 @@ class SkeletonServiceProvider extends PackageServiceProvider
     public function registeringPackage()
     {
         $this->callAfterResolving('lego', function (LegoManager $lego) {
-            $lego->registerApp(function (App $app) {
-                return $this->registerApp($app);
-            });
+            $lego->registerApp(fn (App $app) => $this->registerApp($app));
         });
     }
 
     public function configurePackage(Package $package): void
     {
-        $package
-            ->name('skeleton')
-            ->hasViews();
+        $package->name('skeleton')->hasViews();
     }
 }
