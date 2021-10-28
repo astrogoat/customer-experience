@@ -11,25 +11,25 @@ use VendorName\Skeleton\Settings\SkeletonSettings;
 
 class SkeletonServiceProvider extends PackageServiceProvider
 {
-    public function registerApp(LegoManager $lego)
+    public function registerApp(App $app)
     {
-        $lego->registerApp(function (App $app) {
             return $app
                 ->name('skeleton')
-                ->settings(SkeletonSettings::class);
-        })
-            ->addRoutesToBackend(__DIR__.'/../routes/backend.php')
-            ->addRoutesToFrontend(__DIR__.'/../routes/frontend.php')
-            ->addMigrations([
-                __DIR__ . '/../database/migrations',
-                __DIR__ . '/../database/migrations/settings',
-            ]);
+                ->settings(SkeletonSettings::class)
+                ->migrations([
+                    __DIR__ . '/../database/migrations',
+                    __DIR__ . '/../database/migrations/settings',
+                ])
+                ->backendRoutes(__DIR__.'/../routes/backend.php')
+                ->frontendRoutes(__DIR__.'/../routes/frontend.php');
     }
 
     public function registeringPackage()
     {
         $this->callAfterResolving('lego', function (LegoManager $lego) {
-            $this->registerApp($lego);
+            $lego->registerApp(function (App $app) {
+                return $this->registerApp($app);
+            });
         });
     }
 
@@ -37,9 +37,6 @@ class SkeletonServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('skeleton')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_skeleton_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasViews();
     }
 }
