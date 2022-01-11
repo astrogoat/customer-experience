@@ -54,9 +54,6 @@ Please review [our security policy](../../security/policy) on how to report secu
 - [:author_name](https://github.com/:author_username)
 - [All Contributors](../../contributors)
 
-This skeleton package is forked from the awesome [Spatie skeleton package](https://github.com/spatie/package-skeleton-laravel#support-us). Please go support them if you can.
-
-
 
 
 ## License
