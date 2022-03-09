@@ -29,4 +29,9 @@ class SkeletonSettings extends AppSettings
     {
         return 'Interact with Skeleton.';
     }
+
+    public static function group() : string
+    {
+        return 'skeleton';
+    }
 }
