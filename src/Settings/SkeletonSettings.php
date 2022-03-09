@@ -8,16 +8,17 @@ use VendorName\Skeleton\Actions\SkeletonAction;
 class SkeletonSettings extends AppSettings
 {
     // public string $url;
-    // public string $access_token;
 
-    protected array $rules = [
-        // 'url' => ['required', 'url'],
-        // 'access_token' => ['required'],
-    ];
+    public function rules() : array
+    {
+        return [
+            // 'url' => Rule::requiredIf($this->enabled === true),
+        ];
+    }
 
-    protected static array $actions = [
-        // SkeletonAction::class,
-    ];
+    // protected static array $actions = [
+    //     SkeletonAction::class,
+    // ];
 
     // public static function encrypted(): array
     // {
