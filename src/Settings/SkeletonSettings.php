@@ -9,7 +9,7 @@ class SkeletonSettings extends AppSettings
 {
     // public string $url;
 
-    public function rules() : array
+    public function rules(): array
     {
         return [
             // 'url' => Rule::requiredIf($this->enabled === true),
@@ -30,7 +30,7 @@ class SkeletonSettings extends AppSettings
         return 'Interact with Skeleton.';
     }
 
-    public static function group() : string
+    public static function group(): string
     {
         return 'skeleton';
     }
