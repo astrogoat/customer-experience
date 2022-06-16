@@ -15,6 +15,12 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.hlx.dev"
+        }
+    ],
     "require": {
         "php": "^8.0",
         "astrogoat/strata": "^0.1.0",
