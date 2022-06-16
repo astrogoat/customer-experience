@@ -4,6 +4,7 @@ namespace VendorName\Skeleton\Settings;
 
 use Helix\Lego\Settings\AppSettings;
 use VendorName\Skeleton\Actions\SkeletonAction;
+use Illuminate\Validation\Rule;
 
 class SkeletonSettings extends AppSettings
 {
