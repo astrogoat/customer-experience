@@ -54,8 +54,6 @@ Please review [our security policy](../../security/policy) on how to report secu
 - [:author_name](https://github.com/:author_username)
 - [All Contributors](../../contributors)
 
-
-
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

@@ -32,6 +32,6 @@ class SkeletonServiceProvider extends PackageServiceProvider
 
     public function configurePackage(Package $package): void
     {
-        $package->name('skeleton')->hasViews();
+        $package->name('skeleton')->hasConfigFile()->hasViews();
     }
 }
