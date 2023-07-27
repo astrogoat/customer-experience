@@ -37,17 +37,30 @@ echo $skeleton->echoPhrase('Hello, VendorName!');
 composer test
 ```
 
+## Releasing a new version
+
+Use the included GitHub action to create a new release.
+Go to https://github.com/astrogoat/skeleton/actions/workflows/release.yml click the "Run workflow" dropdown, select your version level bump, and click the "Run workflow" button.
+or run `gh workflow run release.yml` from your skeleton directory if you have the GitHub CLI installed locally.
+
+**Important**: Make sure that the Miles Bot user is included in the list of users who can bypass required pull request requirement
+Your repo -> Settings -> Branches -> Main (edit) -> "Allow specified actors to bypass required pull requests"
+
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
 
 ## Contributing
 
 Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
+
 ## Security Vulnerabilities
 
 Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+
 
 ## Credits
 
