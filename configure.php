@@ -148,5 +148,6 @@ foreach ($files as $file) {
 }
 
 confirm('Execute `composer install` and run tests?') && run('composer install && composer test');
+confirm('Execute `npm install`') && run('npm install');
 
 confirm('Let this script delete itself?', true) && unlink(__FILE__);
