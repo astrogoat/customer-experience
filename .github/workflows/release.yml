@@ -35,6 +35,11 @@ jobs:
         id: bump-version
         run: echo "version=$(npm version ${{ inputs.level }} --tag-version-prefix=)" >> $GITHUB_OUTPUT
 
+      - name: Build assets
+        run: |
+          npm run prod
+          git add -A public
+
       # Make sure that the Miles Bot user is included in the list of users who can bypass required pull request requirement
       # Your repo -> Settings -> Branches -> Main (edit) -> "Allow specified actors to bypass required pull requests"
       - name: Push changes

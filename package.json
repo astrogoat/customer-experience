@@ -6,6 +6,13 @@
         "test": "tests"
     },
     "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production",
         "test": "echo \"Error: no test specified\" && exit 1",
         "release": "gh workflow run release.yml",
         "release:patch": "gh workflow run release.yml --field level=patch",
@@ -25,5 +32,8 @@
     "bugs": {
         "url": "https://github.com/astrogoat/skeleton/issues"
     },
-    "homepage": "https://github.com/astrogoat/skeleton#readme"
+    "homepage": "https://github.com/astrogoat/skeleton#readme",
+    "devDependencies": {
+        "laravel-mix": "^6.0.49"
+    }
 }
