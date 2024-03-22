@@ -87,7 +87,7 @@ $usernameGuess = dirname($usernameGuess);
 $usernameGuess = basename($usernameGuess);
 $authorUsername = ask('Author username', $usernameGuess);
 
-$vendorName = ask('Vendor name', $authorUsername);
+$vendorName = ask('Vendor name', $usernameGuess);
 $vendorSlug = slugify($vendorName);
 $vendorNamespace = ucwords($vendorName);
 $vendorNamespace = ask('Vendor namespace', $vendorNamespace);
@@ -139,7 +139,7 @@ foreach ($files as $file) {
         str_contains($file, 'src/SkeletonServiceProvider.php') => rename($file, './src/' . $className . 'ServiceProvider.php'),
         str_contains($file, 'src/SkeletonFacade.php') => rename($file, './src/' . $className . 'Facade.php'),
         str_contains($file, 'src/Settings/SkeletonSettings.php') => rename($file, './src/Settings/' . $className . 'Settings.php'),
-        str_contains($file, 'database/migrations/settings/create_skeleton_settings.php') => rename($file, './database/migrations/settings/' . date('Y_m_d') . '_100000_create_' . $packageSlugWithoutPrefix . '_settings.php'),
+        str_contains($file, 'database/migrations/settings/create_skeleton_settings.php') => rename($file, './database/migrations/settings/' . date('Y_m_d_His') . '_create_' . $packageSlugWithoutPrefix . '_settings.php'),
         str_contains($file, 'config/skeleton.php') => rename($file, './config/' . $packageSlugWithoutPrefix . '.php'),
         str_contains($file, 'public/css/skeleton.css') => rename($file, './public/css/' . $packageSlugWithoutPrefix . '.css'),
         str_contains($file, 'public/js/skeleton.js') => rename($file, './public/js/' . $packageSlugWithoutPrefix . '.js'),
