@@ -1,1 +1,1 @@
-// Javascript file for skeleton
+// Javascript file for customer-experience

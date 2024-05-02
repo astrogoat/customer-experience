@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-    prefix: 'skeleton-',
+    prefix: 'customer-experience-',
     darkMode: false, // or 'media' or 'class',
     content: [
         './resources/**/*.blade.php',
