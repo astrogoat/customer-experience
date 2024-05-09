@@ -2,11 +2,17 @@
 
 namespace Astrogoat\CustomerExperience;
 
+use Astrogoat\CustomerExperience\Casts\Payload;
+use Astrogoat\CustomerExperience\Peripherals\Support;
+use Astrogoat\CustomerExperience\Peripherals\Faqs;
+use Astrogoat\CustomerExperience\Peripherals\SupportLinks;
+use Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings;
 use Helix\Lego\Apps\App;
 use Helix\Lego\LegoManager;
+use Illuminate\Support\Facades\Blade;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings;
 
 class CustomerExperienceServiceProvider extends PackageServiceProvider
 {
@@ -28,6 +34,13 @@ class CustomerExperienceServiceProvider extends PackageServiceProvider
         $this->callAfterResolving('lego', function (LegoManager $lego) {
             $lego->registerApp(fn (App $app) => $this->registerApp($app));
         });
+    }
+
+    public function bootingPackage()
+    {
+        Livewire::component('astrogoat.customer-experience.peripherals.support', Support::class);
+        Livewire::component('astrogoat.customer-experience.peripherals.faqs', Faqs::class);
+        Livewire::component('astrogoat.customer-experience.peripherals.support-links', SupportLinks::class);
     }
 
     public function configurePackage(Package $package): void
