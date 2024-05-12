@@ -2,7 +2,6 @@
 
 namespace Astrogoat\CustomerExperience;
 
-use Astrogoat\CustomerExperience\Casts\Payload;
 use Astrogoat\CustomerExperience\Peripherals\Support;
 use Astrogoat\CustomerExperience\Peripherals\Faqs;
 use Astrogoat\CustomerExperience\Peripherals\SupportLinks;
