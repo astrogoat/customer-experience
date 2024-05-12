@@ -1,55 +1,55 @@
 <?php
 
 namespace Astrogoat\CustomerExperience\Peripherals;
-use Astrogoat\CustomerExperience\Models\CxChat;
+
 use Astrogoat\CustomerExperience\Models\CxCall;
+use Astrogoat\CustomerExperience\Models\CxChat;
 use Helix\Lego\Settings\Peripherals\Peripheral;
 
 class Support extends Peripheral
 {
-
     public function mount()
     {
-        if(CxChat::count() == 0){
+        if(CxChat::count() == 0) {
 
             CxChat::upsert([
-                ['day'=>'monday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','chat_is_available'=> true ],
-                ['day'=>'tuesday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','chat_is_available'=> true ],
-                ['day'=>'wednesday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','chat_is_available'=> true ],
-                ['day'=>'thursday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','chat_is_available'=> true ],
-                ['day'=>'friday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','chat_is_available'=> true ],
-                ['day'=>'saturday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','chat_is_available'=> false ],
-                ['day'=>'sunday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','chat_is_available'=> false ],
+                ['day' => 'monday','opening_time' => '09:00',
+                'closing_time' => '18:00','chat_is_available' => true ],
+                ['day' => 'tuesday','opening_time' => '09:00',
+                'closing_time' => '18:00','chat_is_available' => true ],
+                ['day' => 'wednesday','opening_time' => '09:00',
+                'closing_time' => '18:00','chat_is_available' => true ],
+                ['day' => 'thursday','opening_time' => '09:00',
+                'closing_time' => '18:00','chat_is_available' => true ],
+                ['day' => 'friday','opening_time' => '09:00',
+                'closing_time' => '18:00','chat_is_available' => true ],
+                ['day' => 'saturday','opening_time' => '09:00',
+                'closing_time' => '18:00','chat_is_available' => false ],
+                ['day' => 'sunday','opening_time' => '09:00',
+                'closing_time' => '18:00','chat_is_available' => false ],
 
-            ],['id','day']);
+            ], ['id','day']);
         }
 
-        if(CxCall::count() == 0){
+        if(CxCall::count() == 0) {
 
-           CxCall::upsert([
-                ['day'=>'monday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','call_is_available'=> true ],
-                ['day'=>'tuesday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','call_is_available'=> true ],
-                ['day'=>'wednesday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','call_is_available'=> true ],
-                ['day'=>'thursday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','call_is_available'=> true ],
-                ['day'=>'friday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','call_is_available'=> true ],
-                ['day'=>'saturday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','call_is_available'=> false ],
-                ['day'=>'sunday','opening_time'=> '09:00',
-                'closing_time'=>'18:00','call_is_available'=> false ],
+            CxCall::upsert([
+                 ['day' => 'monday','opening_time' => '09:00',
+                 'closing_time' => '18:00','call_is_available' => true ],
+                 ['day' => 'tuesday','opening_time' => '09:00',
+                 'closing_time' => '18:00','call_is_available' => true ],
+                 ['day' => 'wednesday','opening_time' => '09:00',
+                 'closing_time' => '18:00','call_is_available' => true ],
+                 ['day' => 'thursday','opening_time' => '09:00',
+                 'closing_time' => '18:00','call_is_available' => true ],
+                 ['day' => 'friday','opening_time' => '09:00',
+                 'closing_time' => '18:00','call_is_available' => true ],
+                 ['day' => 'saturday','opening_time' => '09:00',
+                 'closing_time' => '18:00','call_is_available' => false ],
+                 ['day' => 'sunday','opening_time' => '09:00',
+                 'closing_time' => '18:00','call_is_available' => false ],
 
-            ],['id','day']);
+             ], ['id','day']);
         }
 
         $this->cx_chat_settings = CxChat::query()->get()->toArray();
@@ -58,10 +58,8 @@ class Support extends Peripheral
 
     }
 
-
-
-   public function saveCallSettings()
-   {
+    public function saveCallSettings()
+    {
 
         foreach ($this->cx_call_settings as $settings) {
             $call_setting = CxCall::find($settings['id']);
@@ -72,11 +70,10 @@ class Support extends Peripheral
         }
 
 
-   }
-
+    }
 
     public function saveChatSettings()
-   {
+    {
 
         foreach ($this->cx_chat_settings as $settings) {
             $chat_setting = CxChat::find($settings['id']);
@@ -85,8 +82,7 @@ class Support extends Peripheral
             $chat_setting->chat_is_available = $settings['chat_is_available'] ?? false;
             $chat_setting->save();
         }
-   }
-
+    }
 
     public function render()
     {

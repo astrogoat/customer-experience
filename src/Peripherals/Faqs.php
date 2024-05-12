@@ -5,6 +5,7 @@ namespace Astrogoat\CustomerExperience\Peripherals;
 use Astrogoat\CustomerExperience\Models\Faq;
 use Helix\Lego\Http\Livewire\Traits\ProvidesFeedback;
 use Helix\Lego\Settings\Peripherals\Peripheral;
+
 class Faqs extends Peripheral
 {
     use ProvidesFeedback;
@@ -27,7 +28,6 @@ class Faqs extends Peripheral
         $this->faqs = Faq::query()->get();
         $this->resetInputs();
     }
-
 
     public function save()
     {

@@ -2,9 +2,9 @@
 
 namespace Astrogoat\CustomerExperience\Tests;
 
+use Astrogoat\CustomerExperience\CustomerExperienceServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Astrogoat\CustomerExperience\CustomerExperienceServiceProvider;
 
 class TestCase extends Orchestra
 {

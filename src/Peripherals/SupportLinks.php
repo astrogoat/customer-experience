@@ -8,8 +8,6 @@ use Helix\Lego\Settings\Peripherals\Peripheral;
 
 class SupportLinks extends Peripheral
 {
-
-
     public $support_link_one_enabled;
     public $support_link_two_enabled;
     public $support_link_one_copy;
@@ -47,7 +45,6 @@ class SupportLinks extends Peripheral
         ];
 
     }
-
 
     public function save()
     {
