@@ -2,11 +2,11 @@
 
 namespace Astrogoat\CustomerExperience;
 
+use Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings;
 use Helix\Lego\Apps\App;
 use Helix\Lego\LegoManager;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings;
 
 class CustomerExperienceServiceProvider extends PackageServiceProvider
 {
