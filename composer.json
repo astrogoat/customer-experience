@@ -37,6 +37,9 @@
         "vimeo/psalm": "^4.8|^5.15"
     },
     "autoload": {
+        "files": [
+            "src/Helpers/DateTimeConverter.php"
+        ],
         "psr-4": {
             "Astrogoat\\CustomerExperience\\": "src",
             "Astrogoat\\CustomerExperience\\Database\\Factories\\": "database/factories"

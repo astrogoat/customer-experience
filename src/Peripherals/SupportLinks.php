@@ -8,8 +8,6 @@ use Helix\Lego\Settings\Peripherals\Peripheral;
 
 class SupportLinks extends Peripheral
 {
-
-
     public $support_link_one_enabled;
     public $support_link_two_enabled;
     public $support_link_one_copy;
@@ -41,9 +39,9 @@ class SupportLinks extends Peripheral
             'support_link_one_enabled' => ['boolean'],
             'support_link_two_enabled' => ['boolean'],
             'support_link_one_copy' => ['nullable'],
-            'support_link_one_url' => ['nullable','url'],
+            'support_link_one_url' => ['nullable', 'url'],
             'support_link_two_copy' => ['nullable'],
-            'support_link_two_url' => ['nullable','url'],
+            'support_link_two_url' => ['nullable', 'url'],
         ];
 
     }
@@ -53,8 +51,6 @@ class SupportLinks extends Peripheral
     {
 
         $this->validate();
-
-        ray($this->validate());
 
         SupportLink::updateOrCreate(
             ['id' => 1],
