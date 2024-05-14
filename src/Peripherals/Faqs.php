@@ -29,7 +29,6 @@ class Faqs extends Peripheral
         $this->resetInputs();
     }
 
-
     public function save()
     {
         $this->validate();

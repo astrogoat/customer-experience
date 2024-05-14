@@ -46,7 +46,6 @@ class SupportLinks extends Peripheral
 
     }
 
-
     public function save()
     {
 
