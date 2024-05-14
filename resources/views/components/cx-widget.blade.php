@@ -127,8 +127,8 @@
     </div>
 
     <div class="{{ $this->css('cxFooter') }}">
-        <div class="{{ $this->css('cxLeftFooterLink') }}">View All FAQ’s</div>
-        <div class="{{ $this->css('cxRightFooterLink') }}">Find a Store</div>
+        <a href="https://support.helixsleep.com/hc/en-us" class="{{ $this->css('cxLeftFooterLink') }}">View All FAQ’s</a>
+        <a href="https://go.helixsleep.com/helix-showroom-partners" target="_blank"  class="{{ $this->css('cxRightFooterLink') }}">Find a Store</a>
     </div>
 
 </div>
