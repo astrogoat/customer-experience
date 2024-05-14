@@ -48,7 +48,7 @@ class Faqs extends Peripheral
     {
         $faqs = collect($this->faqs);
         foreach ($ordering as $order => $id) {
-            $index = $faqs->search(fn($faq) => $faq['id'] == $id);
+            $index = $faqs->search(fn ($faq) => $faq['id'] == $id);
             data_set($this->faqs, "$index.order", $order + 1);
         }
 
