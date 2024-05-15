@@ -4,8 +4,8 @@
         class="{{ $this->css('cxBackground') }}"
     >
         <div class="{{ $this->css('cxHeaderContainer') }}">
-            <div class="{{ $this->css('cxAvatarStyle') }}">
-                <x-dynamic-component component="{{ $this->resources('cx-avatar') }}" />
+            <div>
+                <img src="{{ asset('images/cx-avatar.png') }}" class="{{ $this->css('cxAvatarStyle') }}">
             </div>
             <div class="{{ $this->css('cxHeaderContentArea') }}">
                 <span>Have questions?</span>
