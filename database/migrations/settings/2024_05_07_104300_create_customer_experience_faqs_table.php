@@ -12,7 +12,6 @@ class CreateCustomerExperienceFaqsTable extends Migration
     {
         Schema::create('customer_experience_faqs', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('order');
             $table->string('faq_question');
             $table->longText('faq_answer');
             $table->timestamp('created_at');

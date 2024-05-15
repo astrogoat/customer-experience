@@ -4,10 +4,14 @@ namespace Astrogoat\CustomerExperience\Peripherals;
 
 use Astrogoat\CustomerExperience\Models\SupportLink;
 
+use Helix\Fabrick\Notification;
+use Helix\Lego\Http\Livewire\Traits\ProvidesFeedback;
 use Helix\Lego\Settings\Peripherals\Peripheral;
 
 class SupportLinks extends Peripheral
 {
+    use ProvidesFeedback;
+
     public $support_link_one_enabled;
     public $support_link_two_enabled;
     public $support_link_one_copy;
@@ -15,6 +19,19 @@ class SupportLinks extends Peripheral
     public $support_link_two_copy;
     public $support_link_two_url;
 
+
+    public function rules(): array
+    {
+        return [
+            'support_link_one_enabled' => ['boolean'],
+            'support_link_two_enabled' => ['boolean'],
+            'support_link_one_copy' => ['nullable','string'],
+            'support_link_one_url' => ['nullable','url','required_if:support_link_one_copy,*'],
+            'support_link_two_copy' => ['nullable','string'],
+            'support_link_two_url' => ['nullable','url','required_if:support_link_two_copy,*'],
+        ];
+
+    }
     public function mount()
     {
         $supportLinkOne = SupportLink::find(1);
@@ -33,18 +50,7 @@ class SupportLinks extends Peripheral
         }
     }
 
-    public function rules(): array
-    {
-        return [
-            'support_link_one_enabled' => ['boolean'],
-            'support_link_two_enabled' => ['boolean'],
-            'support_link_one_copy' => ['nullable'],
-            'support_link_one_url' => ['nullable', 'url'],
-            'support_link_two_copy' => ['nullable'],
-            'support_link_two_url' => ['nullable', 'url'],
-        ];
 
-    }
 
     public function save()
     {
@@ -54,7 +60,7 @@ class SupportLinks extends Peripheral
         SupportLink::updateOrCreate(
             ['id' => 1],
             [
-                'enabled' => $this->support_link_one_enabled,
+                'enabled' => $this->support_link_one_enabled ?? false,
                 'link_copy' => $this->support_link_one_copy,
                 'link_url' => $this->support_link_one_url,
             ]
@@ -63,11 +69,13 @@ class SupportLinks extends Peripheral
         SupportLink::updateOrCreate(
             ['id' => 2],
             [
-                'enabled' => $this->support_link_two_enabled,
+                'enabled' => $this->support_link_two_enabled ?? false,
                 'link_copy' => $this->support_link_two_copy,
                 'link_url' => $this->support_link_two_url,
             ]
         );
+
+        $this->notify(Notification::success(message: 'Saved')->autoDismiss());
     }
 
     public function render()

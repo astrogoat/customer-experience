@@ -1,5 +1,9 @@
 <div>
-    <x-fab::layouts.panel class="mt-8 space-y-4">
+    <x-fab::layouts.panel
+        class="mt-8 space-y-4"
+        title="Support Links"
+        description="Customer Experience Support Links"
+    >
         <div
             class="">
 
