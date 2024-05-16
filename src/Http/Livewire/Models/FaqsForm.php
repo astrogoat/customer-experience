@@ -7,7 +7,6 @@ use Helix\Lego\Http\Livewire\Models\Form;
 
 class FaqsForm extends Form
 {
-
     public function rules()
     {
         return [
@@ -30,8 +29,4 @@ class FaqsForm extends Form
     {
         return Faq::class;
     }
-
 }
-
-
-
