@@ -61,19 +61,19 @@ class Support extends Peripheral
         if (CxChat::count() == 0) {
 
             CxChat::upsert([
-                ['day' => 'monday', 'opening_time' => '09:00',
+                ['day' => 'Monday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'chat_is_available' => true],
-                ['day' => 'tuesday', 'opening_time' => '09:00',
+                ['day' => 'Tuesday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'chat_is_available' => true],
-                ['day' => 'wednesday', 'opening_time' => '09:00',
+                ['day' => 'Wednesday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'chat_is_available' => true],
-                ['day' => 'thursday', 'opening_time' => '09:00',
+                ['day' => 'Thursday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'chat_is_available' => true],
-                ['day' => 'friday', 'opening_time' => '09:00',
+                ['day' => 'Friday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'chat_is_available' => true],
-                ['day' => 'saturday', 'opening_time' => '09:00',
+                ['day' => 'Saturday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'chat_is_available' => false],
-                ['day' => 'sunday', 'opening_time' => '09:00',
+                ['day' => 'Sunday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'chat_is_available' => false],
 
             ], ['id', 'day']);
@@ -83,19 +83,19 @@ class Support extends Peripheral
         if (CxCall::count() == 0) {
 
             CxCall::upsert([
-                ['day' => 'monday', 'opening_time' => '09:00',
+                ['day' => 'Monday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'call_is_available' => true],
-                ['day' => 'tuesday', 'opening_time' => '09:00',
+                ['day' => 'Tuesday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'call_is_available' => true],
-                ['day' => 'wednesday', 'opening_time' => '09:00',
+                ['day' => 'Wednesday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'call_is_available' => true],
-                ['day' => 'thursday', 'opening_time' => '09:00',
+                ['day' => 'Thursday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'call_is_available' => true],
-                ['day' => 'friday', 'opening_time' => '09:00',
+                ['day' => 'Friday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'call_is_available' => true],
-                ['day' => 'saturday', 'opening_time' => '09:00',
+                ['day' => 'Saturday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'call_is_available' => false],
-                ['day' => 'sunday', 'opening_time' => '09:00',
+                ['day' => 'Sunday', 'opening_time' => '09:00',
                     'closing_time' => '18:00', 'call_is_available' => false],
 
             ], ['id', 'day']);
@@ -116,7 +116,6 @@ class Support extends Peripheral
 
         $this->notify(Notification::success(message: 'Saved')->autoDismiss());
     }
-
 
     public function saveChatSettings(): void
     {

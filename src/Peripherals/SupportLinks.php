@@ -23,12 +23,12 @@ class SupportLinks extends Peripheral
     public function rules(): array
     {
         return [
-            'support_link_one_enabled' => ['boolean'],
-            'support_link_two_enabled' => ['boolean'],
+            'support_link_one_enabled' => ['nullable','boolean'],
+            'support_link_two_enabled' => ['nullable','boolean'],
             'support_link_one_copy' => ['nullable','string'],
-            'support_link_one_url' => ['nullable','url','required_if:support_link_one_copy,*'],
+            'support_link_one_url' => ['nullable','string'],
             'support_link_two_copy' => ['nullable','string'],
-            'support_link_two_url' => ['nullable','url','required_if:support_link_two_copy,*'],
+            'support_link_two_url' => ['nullable','string'],
         ];
 
     }
@@ -56,6 +56,7 @@ class SupportLinks extends Peripheral
     {
 
         $this->validate();
+        ray($this->validate());
 
         SupportLink::updateOrCreate(
             ['id' => 1],

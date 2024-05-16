@@ -2,8 +2,10 @@
     title="{{$model->faq_question ?: 'New Faqs'}}"
     :breadcrumbs="[
         ['title' => 'Home', 'url' => route('lego.dashboard')],
+        ['title' => 'Apps', 'url' => route('lego.customer-experience.apps.index')],
+		['title' => 'Customer Experience', 'url' => route('lego.customer-experience.index')],
         ['title' => 'FAQs','url' => route('lego.customer-experience.faqs.index')],
-        ['title' => $model->faq_question ?: 'New Faqs'],
+        ['title' => $model->faq_question ?: 'New FAQs'],
     ]"
     x-data="{ showColumnFilters: false }"
     x-on:keydown.meta.s.window.prevent="$wire.call('save')" {{-- For Mac --}}
@@ -30,24 +32,17 @@
         <x-fab::layouts.panel>
             <x-fab::forms.input
                 label="Question"
-                wire:model="model.faq_question"
+                wire:model.lazy="model.faq_question"
             />
         </x-fab::layouts.panel>
 
         <x-fab::layouts.panel>
             <x-fab::forms.textarea
                 label="Answer"
-                wire:model="model.faq_answer"
+                wire:model.lazy="model.faq_answer"
             />
         </x-fab::layouts.panel>
 
-
-
     </x-fab::layouts.main-with-aside>
-
-    <x-slot name="actions">
-        @include('lego::models._includes.forms.page-actions')
-    </x-slot>
-
 
 </x-fab::layouts.page>

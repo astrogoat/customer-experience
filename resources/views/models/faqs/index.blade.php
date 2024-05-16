@@ -4,8 +4,9 @@
     title="Faqs"
     :breadcrumbs="[
         ['title' => 'Home', 'url' => route('lego.dashboard')],
+		['title' => 'Apps', 'url' => route('lego.customer-experience.apps.index')],
         ['title' => 'Customer Experience', 'url' => route('lego.customer-experience.index')],
-        ['title' => 'Faqs', 'url' => route('lego.customer-experience.faqs.index')],
+        ['title' => 'FAQs', 'url' => route('lego.customer-experience.faqs.index')],
     ]"
 >
     <x-slot name="actions">

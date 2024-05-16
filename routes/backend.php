@@ -17,3 +17,7 @@
     Route::get('/admin/apps/customer-experience',function(){
         return redirect('/admin/apps/customer-experience');
     })->name('customer-experience.index');
+
+    Route::get('/admin/apps/',function(){
+        return redirect('/admin/apps');
+    })->name('customer-experience.apps.index');
