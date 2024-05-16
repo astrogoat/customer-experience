@@ -128,7 +128,6 @@ class Support extends Peripheral
             $chat_setting->closing_time = DateTimeConverter::estToUtc($settings['closing_time']);
             $chat_setting->chat_is_available = $settings['chat_is_available'] ?? false;
             $chat_setting->save();
-
         }
 
         $this->notify(Notification::success(message: 'Saved')->autoDismiss());
