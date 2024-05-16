@@ -9,7 +9,6 @@ use Helix\Lego\Settings\AppSettings;
 
 class CustomerExperienceSettings extends AppSettings
 {
-
     public bool $chat_enabled;
     public bool $call_enabled;
 

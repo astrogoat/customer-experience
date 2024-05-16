@@ -3,8 +3,8 @@
 namespace Astrogoat\CustomerExperience\Peripherals;
 
 use Astrogoat\CustomerExperience\Helpers\DateTimeConverter;
-use Astrogoat\CustomerExperience\Models\CxChat;
 use Astrogoat\CustomerExperience\Models\CxCall;
+use Astrogoat\CustomerExperience\Models\CxChat;
 use Helix\Fabrick\Notification;
 use Helix\Lego\Http\Livewire\Traits\ProvidesFeedback;
 use Helix\Lego\Settings\Peripherals\Peripheral;
@@ -43,6 +43,7 @@ class Support extends Peripheral
             $est_closing_time = DateTimeConverter::utcToEst($item->closing_time);
             $item['opening_time'] = $est_opening_time;
             $item['closing_time'] = $est_closing_time;
+
             return $item;
         });
 
@@ -51,6 +52,7 @@ class Support extends Peripheral
             $est_closing_time = DateTimeConverter::utcToEst($item->closing_time);
             $item['opening_time'] = $est_opening_time;
             $item['closing_time'] = $est_closing_time;
+
             return $item;
         });
 
@@ -117,7 +119,6 @@ class Support extends Peripheral
         $this->notify(Notification::success(message: 'Saved')->autoDismiss());
     }
 
-
     public function saveChatSettings(): void
     {
         $this->validate();
@@ -137,5 +138,4 @@ class Support extends Peripheral
     {
         return view('customer-experience::peripherals.support');
     }
-
 }

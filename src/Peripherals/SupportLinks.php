@@ -19,7 +19,6 @@ class SupportLinks extends Peripheral
     public $support_link_two_copy;
     public $support_link_two_url;
 
-
     public function rules(): array
     {
         return [
@@ -32,6 +31,7 @@ class SupportLinks extends Peripheral
         ];
 
     }
+
     public function mount()
     {
         $supportLinkOne = SupportLink::find(1);
@@ -49,8 +49,6 @@ class SupportLinks extends Peripheral
             $this->support_link_two_url = $supportLinkTwo->link_url;
         }
     }
-
-
 
     public function save()
     {
