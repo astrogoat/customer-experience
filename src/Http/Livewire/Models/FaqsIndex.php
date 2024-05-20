@@ -21,12 +21,6 @@ class FaqsIndex extends Index
             'updated_at' => 'Last updated',
         ];
     }
-
-    public static function getDisplayKeyName(): string
-    {
-        return 'faq_question';
-    }
-
     public function mainSearchColumn(): string|false
     {
         return 'faq_question';
@@ -37,7 +31,7 @@ class FaqsIndex extends Index
 
         return view('customer-experience::models.faqs.index', [
             'models' => $this->getModels(),
-        ])->extends('lego::layouts.lego')->section('content');
+        ])->extends('lego::layouts.lego');
     }
 
 

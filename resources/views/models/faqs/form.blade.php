@@ -2,7 +2,7 @@
     title="{{$model->faq_question ?: 'New Faqs'}}"
     :breadcrumbs="[
         ['title' => 'Home', 'url' => route('lego.dashboard')],
-        ['title' => 'Apps', 'url' => route('lego.customer-experience.apps.index')],
+        ['title' => 'Apps', 'url' => route('lego.apps.index')],
 		['title' => 'Customer Experience', 'url' => route('lego.customer-experience.index')],
         ['title' => 'FAQs','url' => route('lego.customer-experience.faqs.index')],
         ['title' => $model->faq_question ?: 'New FAQs'],

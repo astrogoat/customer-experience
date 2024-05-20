@@ -20,4 +20,4 @@
 
     Route::get('/admin/apps/',function(){
         return redirect('/admin/apps');
-    })->name('customer-experience.apps.index');
+    })->name('apps.index');

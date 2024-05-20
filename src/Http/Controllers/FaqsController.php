@@ -11,7 +11,6 @@ class FaqsController extends Controller
     public function index()
     {
         $faqs = Faq::paginate(20);
-
         return view('customer-experience::models.faqs.index', compact('faqs'));
     }
 
@@ -19,7 +18,6 @@ class FaqsController extends Controller
     {
         $faq->load('sections');
         return view('lego::sectionables.show', ['sectionable' => $faq]);
-
     }
 
     public function create()
