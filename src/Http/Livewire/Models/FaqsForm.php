@@ -29,8 +29,4 @@ class FaqsForm extends Form
     {
         return Faq::class;
     }
-
 }
-
-
-

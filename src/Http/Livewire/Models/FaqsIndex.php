@@ -7,7 +7,6 @@ use Helix\Lego\Http\Livewire\Models\Index;
 
 class FaqsIndex extends Index
 {
-
     public function model(): string
     {
         return Faq::class;
@@ -33,6 +32,4 @@ class FaqsIndex extends Index
             'models' => $this->getModels(),
         ])->extends('lego::layouts.lego');
     }
-
-
 }

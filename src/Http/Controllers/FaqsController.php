@@ -7,7 +7,6 @@ use Illuminate\Routing\Controller;
 
 class FaqsController extends Controller
 {
-
     public function index()
     {
         $faqs = Faq::paginate(20);
@@ -17,6 +16,7 @@ class FaqsController extends Controller
     public function show(Faq $faq)
     {
         $faq->load('sections');
+
         return view('lego::sectionables.show', ['sectionable' => $faq]);
     }
 
@@ -29,5 +29,4 @@ class FaqsController extends Controller
     {
         return view('customer-experience::models.faqs.edit', compact('faq'));
     }
-
 }
