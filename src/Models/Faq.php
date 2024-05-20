@@ -11,7 +11,7 @@ use Helix\Lego\Models\Contracts\Searchable;
 use Helix\Lego\Models\Model as LegoModel;
 use Helix\Lego\Models\Traits\HasMetafields;
 
-class Faq extends LegoModel implements Searchable,  Mediable, Metafieldable
+class Faq extends LegoModel implements Searchable, Mediable, Metafieldable
 {
     use HasMetafields;
     use HasMedia;
@@ -21,14 +21,17 @@ class Faq extends LegoModel implements Searchable,  Mediable, Metafieldable
     {
         return Icon::DOCUMENT_TEXT;
     }
+
     public function searchableName(): string
     {
         return $this->name();
     }
+
     public function searchableDescription(): string
     {
         // TODO: Implement searchableDescription() method.
     }
+
     public function searchableRoute(): string
     {
         return route('lego.customer-experience.faqs.edit', $this);
@@ -41,7 +44,7 @@ class Faq extends LegoModel implements Searchable,  Mediable, Metafieldable
 
     public static function searchableIndexRoute(): string
     {
-       return route('lego.customer-experience.faqs.index');
+        return route('lego.customer-experience.faqs.index');
     }
 
     public static function searchableIcon(): string

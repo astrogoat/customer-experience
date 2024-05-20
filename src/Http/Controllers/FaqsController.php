@@ -10,6 +10,7 @@ class FaqsController extends Controller
     public function index()
     {
         $faqs = Faq::paginate(20);
+
         return view('customer-experience::models.faqs.index', compact('faqs'));
     }
 

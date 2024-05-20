@@ -20,6 +20,7 @@ class FaqsIndex extends Index
             'updated_at' => 'Last updated',
         ];
     }
+
     public function mainSearchColumn(): string|false
     {
         return 'faq_question';
