@@ -81,7 +81,7 @@
                                     What is covered under my 10-15 year mattress warranty?
                                 </div>
                                 <div class="{{ $this->css('cxFaqChevron') }}">
-                                    <x-dynamic-component component="{{ $this->resources('cx-faq-chevron') }}" />
+                                    <x-dynamic-component component="{{ $this->resources('cx-faqs-chevron') }}" />
                                 </div>
                             </div>
                         </summary>
@@ -103,7 +103,7 @@
                                     What is the 100 night sleep trial?
                                 </div>
                                 <div class="{{ $this->css('cxFaqChevron') }}">
-                                    <x-dynamic-component component="{{ $this->resources('cx-faq-chevron') }}" />
+                                    <x-dynamic-component component="{{ $this->resources('cx-faqs-chevron') }}" />
                                 </div>
                             </div>
                         </summary>
@@ -125,7 +125,7 @@
                                     Have questions about shipping?
                                 </div>
                                 <div class="{{ $this->css('cxFaqChevron') }}">
-                                    <x-dynamic-component component="{{ $this->resources('cx-faq-chevron') }}" />
+                                    <x-dynamic-component component="{{ $this->resources('cx-faqs-chevron') }}" />
                                 </div>
                             </div>
                         </summary>

@@ -1,8 +1,10 @@
 <div>
-    <x-fab::layouts.panel class="mt-8 space-y-4">
-        <div
-            class="">
-
+    <x-fab::layouts.panel
+        class="mt-8 space-y-4"
+        title="Support Links"
+        description="Customer Experience Support Links"
+    >
+        <div>
             <div>
                 <x-fab::forms.checkbox
                     label="Enable Support Link #1"
@@ -26,10 +28,10 @@
                     wire:model="support_link_one_url"
                 />
             </div>
+
         </div>
 
-
-        <div class="">
+        <div>
 
             <div>
                 <x-fab::forms.checkbox
@@ -54,6 +56,7 @@
                     wire:model="support_link_two_url"
                 />
             </div>
+
         </div>
 
         <div class="w-full flex justify-end">
@@ -61,5 +64,6 @@
                 Save
             </x-fab::elements.button>
         </div>
+
     </x-fab::layouts.panel>
 </div>
