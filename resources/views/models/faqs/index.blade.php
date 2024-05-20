@@ -6,6 +6,7 @@
         ['title' => 'Customer Experience', 'url' => route('lego.customer-experience.index')],
         ['title' => 'FAQs', 'url' => route('lego.customer-experience.faqs.index')],
     ]"
+    x-data="{ showColumnFilters: false }"
 >
     <x-slot name="actions">
         <x-fab::elements.button type="link" :url="route('lego.customer-experience.faqs.create')">
@@ -18,11 +19,16 @@
         </x-fab::elements.button>
     </x-slot>
 
+    @include('lego::models._includes.indexes.filters')
+
     <x-fab::lists.table>
         <x-slot name="headers">
             @include('lego::models._includes.indexes.headers')
             <x-fab::lists.table.header :hidden="true">Edit</x-fab::lists.table.header>
         </x-slot>
+
+        @include('lego::models._includes.indexes.header-filters')
+        <x-fab::lists.table.header x-show="showColumnFilters" x-cloak class="bg-gray-100" />
 
         @foreach($models as $faq)
             <x-fab::lists.table.row :odd="$loop->odd">
