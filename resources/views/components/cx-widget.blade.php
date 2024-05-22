@@ -1,12 +1,22 @@
 @if(settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'enabled') === true)
     @php
-        $todayCallOpeningHours = \Astrogoat\CustomerExperience\Models\CxCall::where('day', now()->format('l'))->first();
+        $chatIsEnabled = settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'chat_enabled') === true;
+        $callIsEnabled = settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'call_enabled') === true;
+
+        $todayChatOpeningHours = \Astrogoat\CustomerExperience\Models\CxChat::where('day', now()->format('l'))->first();
+
         $day = \Illuminate\Support\Str::lower(now()->format('l'));
 
+        $chatIsAvailable = $todayChatOpeningHours->chat_is_available;
+        $chatOpeningTime = $todayChatOpeningHours->opening_time;
+        $chatClosingTime = $todayChatOpeningHours->closing_time;
+
+        $todayCallOpeningHours = \Astrogoat\CustomerExperience\Models\CxCall::where('day', now()->format('l'))->first();
 
         $callIsAvailable = $todayCallOpeningHours->call_is_available;
         $callOpeningTime = $todayCallOpeningHours->opening_time;
         $callClosingTime = $todayCallOpeningHours->closing_time;
+
     @endphp
 
     <div
@@ -29,15 +39,16 @@
                             <button
                                 data-area="chat-now"
                                 type="button"
-                                class="{{ $this->css('cxButton') }}"
+                                class="{{ $chatIsEnabled ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
                                 aria-label="chat-now"
-                                disabled
+                                {{ $chatIsEnabled ? '' : 'disabled' }}
                             >
                                 Chat Now
                             </button>
                             <div class="{{ $this->css('cxTimeZoneContainer') }}">
+                                @dd($chatIsAvailable, $chatIsEnabled)
                                 <div>
-                                    @if($callIsAvailable)
+                                    @if($chatIsAvailable && $chatIsEnabled)
                                         <div class="{{ $this->css('cxGreenDot') }}"></div>
                                     @else
                                         <div class="{{ $this->css('cxRedDot') }}"></div>
@@ -50,9 +61,9 @@
                             <button
                                 data-area="chat-now"
                                 type="button"
-                                class="{{ $this->css('cxButton') }}"
+                                class="{{ $callIsEnabled ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
                                 aria-label="chat-now"
-                                disabled
+                                {{ $callIsEnabled ? '' : 'disabled' }}
                             >
                                 Call Us
                             </button>
@@ -71,79 +82,38 @@
         <div class="{{ $this->css('cxFaqBackground') }}">
             <div>
                 <div class="{{ $this->css('cxFaqDivider') }}">
-                    <details class="{{ $this->css('cxFaqWrapper') }}">
-                        <summary class="{{ $this->css('cxFaqTitleContainer') }}">
-                            <div class="{{ $this->css('cxFaqTitleIcon') }}">
-                                @svg('helix-sleep.award', 'w-7 text-dawn-yellow')
-                            </div>
-                            <div class="{{ $this->css('cxFaqTitleAndChevron') }}">
-                                <div class="{{ $this->css('cxFaqTitle') }}">
-                                    What is covered under my 10-15 year mattress warranty?
+                    @foreach(\Astrogoat\CustomerExperience\Models\Faq::all() as $faq)
+                        <details class="{{ $this->css('cxFaqWrapper') }}">
+                            <summary class="{{ $this->css('cxFaqTitleContainer') }}">
+                                <div class="{{ $this->css('cxFaqTitleArea') }}">
+                                    {!! $faq->getFirstMedia('Icon')->class($this->css('cxFaqTitleIcon')) !!}
                                 </div>
-                                <div class="{{ $this->css('cxFaqChevron') }}">
-                                    <x-dynamic-component component="{{ $this->resources('cx-faqs-chevron') }}" />
+                                <div class="{{ $this->css('cxFaqTitleAndChevron') }}">
+                                    <div class="{{ $this->css('cxFaqTitle') }}">
+                                        {{ $faq->faq_question }}
+                                    </div>
+                                    <div class="{{ $this->css('cxFaqChevron') }}">
+                                        <x-dynamic-component component="{{ $this->resources('cx-faq-chevron') }}" />
+                                    </div>
                                 </div>
-                            </div>
-                        </summary>
-                        <div>
-                            <div class="{{ $this->css('cxFaqDescription') }}">
-                                <p>
-                                    Each Helix Mattress is covered by a 10 year limited warranty. Each  Helix Plus and Helix Luxe Mattress is covered by a 15 year limited warranty. This limited warranty gives you specific legal rights, and  covers all manufacturing defects
-                                </p>
-                            </div>
-                        </div>
-                    </details>
-                    <details class="{{ $this->css('cxFaqWrapper') }}">
-                        <summary class="{{ $this->css('cxFaqTitleContainer') }}">
-                            <div class="{{ $this->css('cxFaqTitleIcon') }}">
-                                @svg('helix-sleep.lamb', 'w-7 text-dusk-raspberry')
-                            </div>
-                            <div class="{{ $this->css('cxFaqTitleAndChevron') }}">
-                                <div class="{{ $this->css('cxFaqTitle') }}">
-                                    What is the 100 night sleep trial?
-                                </div>
-                                <div class="{{ $this->css('cxFaqChevron') }}">
-                                    <x-dynamic-component component="{{ $this->resources('cx-faqs-chevron') }}" />
+                            </summary>
+                            <div>
+                                <div class="{{ $this->css('cxFaqDescription') }}">
+                                    <p>
+                                        {!! $faq->faq_answer !!}
+                                    </p>
                                 </div>
                             </div>
-                        </summary>
-                        <div>
-                            <div class="{{ $this->css('cxFaqDescription') }}">
-                                <p>
-                                    Each Helix Mattress is covered by a 10 year limited warranty. Each  Helix Plus and Helix Luxe Mattress is covered by a 15 year limited warranty. This limited warranty gives you specific legal rights, and  covers all manufacturing defects
-                                </p>
-                            </div>
-                        </div>
-                    </details>
-                    <details class="{{ $this->css('cxFaqWrapper') }}">
-                        <summary class="{{ $this->css('cxFaqTitleContainer') }}">
-                            <div class="{{ $this->css('cxFaqTitleIcon') }}">
-                                @svg('helix-sleep.truck', 'w-7 text-moonlight-light-blue')
-                            </div>
-                            <div class="{{ $this->css('cxFaqTitleAndChevron') }}">
-                                <div class="{{ $this->css('cxFaqTitle') }}">
-                                    Have questions about shipping?
-                                </div>
-                                <div class="{{ $this->css('cxFaqChevron') }}">
-                                    <x-dynamic-component component="{{ $this->resources('cx-faqs-chevron') }}" />
-                                </div>
-                            </div>
-                        </summary>
-                        <div>
-                            <div class="{{ $this->css('cxFaqDescription') }}">
-                                <p>
-                                    Each Helix Mattress is covered by a 10 year limited warranty. Each  Helix Plus and Helix Luxe Mattress is covered by a 15 year limited warranty. This limited warranty gives you specific legal rights, and  covers all manufacturing defects
-                                </p>
-                            </div>
-                        </div>
-                    </details>
+                        </details>
+                    @endforeach
                 </div>
             </div>
         </div>
 
         <div class="{{ $this->css('cxFooter') }}">
-            <a href="https://support.helixsleep.com/hc/en-us" class="{{ $this->css('cxLeftFooterLink') }}">View All FAQ’s</a>
-            <a href="https://go.helixsleep.com/helix-showroom-partners" target="_blank"  class="{{ $this->css('cxRightFooterLink') }}">Find a Store</a>
+            @foreach(\Astrogoat\CustomerExperience\Models\SupportLink::limit(2)->get() as $link)
+                <a href="{{ $link->link_url }}" class="{{ $loop->index == 0 ? $this->css('cxLeftFooterLink') : $this->css('cxRightFooterLink') }}">{{ $link->link_copy }}</a>
+            @endforeach
         </div>
     </div>
 
