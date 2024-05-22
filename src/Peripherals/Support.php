@@ -2,12 +2,12 @@
 
 namespace Astrogoat\CustomerExperience\Peripherals;
 
-use Helix\Fabrick\Notification;
-use Helix\Lego\Settings\Peripherals\Peripheral;
+use Astrogoat\CustomerExperience\Helpers\DateTimeConverter;
 use Astrogoat\CustomerExperience\Models\CxCall;
 use Astrogoat\CustomerExperience\Models\CxChat;
+use Helix\Fabrick\Notification;
 use Helix\Lego\Http\Livewire\Traits\ProvidesFeedback;
-use Astrogoat\CustomerExperience\Helpers\DateTimeConverter;
+use Helix\Lego\Settings\Peripherals\Peripheral;
 
 class Support extends Peripheral
 {
