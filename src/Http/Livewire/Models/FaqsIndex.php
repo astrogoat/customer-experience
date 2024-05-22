@@ -28,7 +28,6 @@ class FaqsIndex extends Index
 
     public function render()
     {
-
         return view('customer-experience::models.faqs.index', [
             'models' => $this->getModels(),
         ])->extends('lego::layouts.lego');
