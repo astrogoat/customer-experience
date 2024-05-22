@@ -22,14 +22,22 @@ class Faq extends LegoModel implements Searchable, Mediable, Metafieldable
         return Icon::DOCUMENT_TEXT;
     }
 
+    public static function searchableFields(): array
+    {
+        return [
+            'faq_question' => 'Question',
+            'faq_answer' => 'Answer',
+        ];
+    }
+
     public function searchableName(): string
     {
-        return $this->name();
+        return $this->faq_question;
     }
 
     public function searchableDescription(): string
     {
-        // TODO: Implement searchableDescription() method.
+        return $this->faq_answer;
     }
 
     public function searchableRoute(): string
