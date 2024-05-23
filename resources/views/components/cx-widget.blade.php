@@ -1,11 +1,13 @@
 @php
     use Carbon\Carbon;
+
+    $cxAppSettingIsEnabled = fn($setting) => settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, $setting) === true;
 @endphp
 
-@if(settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'enabled') === true)
+@if($cxAppSettingIsEnabled('enabled'))
     @php
-        $chatIsEnabledInApp = settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'chat_enabled') === true;
-        $callIsEnabledInApp = settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'call_enabled') === true;
+        $chatIsEnabledInApp = $cxAppSettingIsEnabled('chat_enabled');
+        $callIsEnabledInApp = $cxAppSettingIsEnabled('call_enabled');
 
         $currentTime = Carbon::now('UTC')->format('H:i:s');
         $currentDay = Carbon::now('UTC')->format('l');
