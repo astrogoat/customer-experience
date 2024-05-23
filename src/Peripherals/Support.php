@@ -13,8 +13,6 @@ class Support extends Peripheral
 {
     use ProvidesFeedback;
 
-    public bool $chat_enabled;
-    public bool $call_enabled;
     public $cx_chat_settings;
     public $cx_call_settings;
 
@@ -110,9 +108,11 @@ class Support extends Peripheral
 
         foreach ($this->cx_call_settings->toArray() as $settings) {
             $call_setting = CxCall::find($settings['id']);
+
+            ray(is_string($settings['call_is_available']));
             $call_setting->opening_time = DateTimeConverter::estToUtc($settings['opening_time']);
             $call_setting->closing_time = DateTimeConverter::estToUtc($settings['closing_time']);
-            $call_setting->call_is_available = $settings['call_is_available'] ?? false;
+            $call_setting->call_is_available = $settings['call_is_available'];
             $call_setting->save();
         }
 
@@ -127,7 +127,7 @@ class Support extends Peripheral
             $chat_setting = CxChat::find($settings['id']);
             $chat_setting->opening_time = DateTimeConverter::estToUtc($settings['opening_time']);
             $chat_setting->closing_time = DateTimeConverter::estToUtc($settings['closing_time']);
-            $chat_setting->chat_is_available = $settings['chat_is_available'] ?? false;
+            $chat_setting->chat_is_available = $settings['chat_is_available'];
             $chat_setting->save();
         }
 

@@ -13,7 +13,7 @@
                     <input
                         id="day-{{$cx_call_settings[$loop->index]['id']}}"
                         type="checkbox"
-                        value="{{$cx_call_settings[$loop->index]['id']}}"
+                        value="1"
                         wire:key="day-{{$cx_call_settings[$loop->index]['id']}}"
                         wire:model="cx_call_settings.{{$loop->index}}.call_is_available"
                         class="h-4 w-4 rounded border-gray-300 {{ $call_enabled ? 'text-indigo-600' : 'text-gray-500' }} focus:ring-indigo-600"
@@ -65,7 +65,7 @@
                     <input
                         id="day-{{$cx_chat_settings[$loop->index]['id']}}"
                         type="checkbox"
-                        value="{{$cx_chat_settings[$loop->index]['id']}}"
+                        value="1"
                         wire:key="day-{{$cx_chat_settings[$loop->index]['id']}}"
                         wire:model="cx_chat_settings.{{$loop->index}}.chat_is_available"
                         class="h-4 w-4 rounded border-gray-300 {{ $chat_enabled ? 'text-indigo-600' : 'text-gray-500' }} focus:ring-indigo-600"
