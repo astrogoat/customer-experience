@@ -63,7 +63,8 @@
                         Our Sleep Experts will help you feel confident in your mattress choice!
                     </div>
                     <div class="{{ $this->css('cxHeaderCtas') }}">
-                        <div class="{{ $this->css('cxHeaderButtonContainer') }}">
+                        @if($cxAppSettingIsEnabled('chat_enabled'))
+                            <div class="{{ $this->css('cxHeaderButtonContainer') }}">
                             <button
                                 data-area="chat-now"
                                 type="button"
@@ -86,9 +87,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="{{ $this->css('cxHeaderButtonContainer') }}">
+                        @endif
+                        @if($cxAppSettingIsEnabled('call_enabled'))
+                            <div class="{{ $this->css('cxHeaderButtonContainer') }}">
                             <button
-                                data-area="chat-now"
+                                data-area="call-now"
                                 type="button"
                                 class="{{ $callIsAvailable ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
                                 aria-label="chat-now"
@@ -109,6 +112,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
