@@ -1,27 +1,52 @@
+@php
+    use Carbon\Carbon;
+@endphp
+
 @if(settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'enabled') === true)
     @php
-        $chatIsEnabled = settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'chat_enabled') === true;
-        $callIsEnabled = settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'call_enabled') === true;
+        $chatIsEnabledInApp = settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'chat_enabled') === true;
+        $callIsEnabledInApp = settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, 'call_enabled') === true;
 
-        $todayChatOpeningHours = \Astrogoat\CustomerExperience\Models\CxChat::where('day', now()->format('l'))->first();
+        $currentTime = Carbon::now('UTC')->format('H:i:s');
+        $currentDay = Carbon::now('UTC')->format('l');
 
-        $day = \Illuminate\Support\Str::lower(now()->format('l'));
-
+        $todayChatOpeningHours = \Astrogoat\CustomerExperience\Models\CxChat::where('day', $currentDay)->first();
         $chatIsAvailable = $todayChatOpeningHours->chat_is_available;
         $chatOpeningTime = $todayChatOpeningHours->opening_time;
         $chatClosingTime = $todayChatOpeningHours->closing_time;
+        $chatIsAvailable = $chatIsEnabledInApp && $todayChatOpeningHours->chat_is_available && $chatOpeningTime <= $currentTime && $currentTime <= $chatClosingTime;
 
-        $todayCallOpeningHours = \Astrogoat\CustomerExperience\Models\CxCall::where('day', now()->format('l'))->first();
-
-        $callIsAvailable = $todayCallOpeningHours->call_is_available;
+        $todayCallOpeningHours = \Astrogoat\CustomerExperience\Models\CxCall::where('day', $currentDay)->first();
         $callOpeningTime = $todayCallOpeningHours->opening_time;
         $callClosingTime = $todayCallOpeningHours->closing_time;
-
+        $callIsAvailable = $callIsEnabledInApp && $todayCallOpeningHours->call_is_available && $callOpeningTime <= $currentTime && $currentTime <= $callClosingTime;
     @endphp
 
     <div
         data-area="cx"
         class="{{ $this->css('cxBackground') }}"
+        x-data="{
+            clientTimezone: '',
+            clientChatOpeningTime: '',
+            clientChatClosingTime: '',
+            clientCallOpeningTime: '',
+            clientCallClosingTime: '',
+            convertToClientTimezone(time) {
+                const newTime = dayjs.utc(time, 'HH:mm:ss').tz(this.clientTimezone).format('HH:mm:ss');
+                return dayjs(newTime, 'HH:mm:ss').format('h:mm A');
+            }
+        }" x-init="() => {
+            dayjs.extend(window.dayjs_plugin_utc);
+            dayjs.extend(window.dayjs_plugin_timezone);
+            dayjs.extend(window.dayjs_plugin_customParseFormat);
+
+            clientTimezone = window.dayjs.tz.guess();
+
+            clientChatOpeningTime = convertToClientTimezone('{{ $chatOpeningTime }}');
+            clientChatClosingTime = convertToClientTimezone('{{ $chatClosingTime }}');
+            clientCallOpeningTime = convertToClientTimezone('{{ $callOpeningTime }}');
+            clientCallClosingTime = convertToClientTimezone('{{ $callClosingTime }}');
+        }"
     >
         <div class="{{ $this->css('cxHeaderContainer') }}">
             <div>
@@ -39,39 +64,46 @@
                             <button
                                 data-area="chat-now"
                                 type="button"
-                                class="{{ $chatIsEnabled ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
+                                class="{{ $chatIsAvailable  ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
                                 aria-label="chat-now"
-                                {{ $chatIsEnabled ? '' : 'disabled' }}
+                                {{ $chatIsAvailable ? '' : 'disabled' }}
                             >
                                 Chat Now
                             </button>
                             <div class="{{ $this->css('cxTimeZoneContainer') }}">
-                                @dd($chatIsAvailable, $chatIsEnabled)
                                 <div>
-                                    @if($chatIsAvailable && $chatIsEnabled)
+                                    @if($chatIsAvailable)
                                         <div class="{{ $this->css('cxGreenDot') }}"></div>
                                     @else
                                         <div class="{{ $this->css('cxRedDot') }}"></div>
                                     @endif
                                 </div>
-                                <div class="{{ $this->css('cxTimeZoneText') }}">M-Su 10AM-10PM EST {{ $day }}</div>
+                                <div class="{{ $this->css('cxTimeZoneText') }}">
+                                    <span x-text="clientChatOpeningTime"></span> - <span x-text="clientChatClosingTime"></span> <span x-text="clientTimezone"></span>
+                                </div>
                             </div>
                         </div>
                         <div class="{{ $this->css('cxHeaderButtonContainer') }}">
                             <button
                                 data-area="chat-now"
                                 type="button"
-                                class="{{ $callIsEnabled ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
+                                class="{{ $callIsAvailable ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
                                 aria-label="chat-now"
-                                {{ $callIsEnabled ? '' : 'disabled' }}
+                                {{ $callIsAvailable ? '' : 'disabled' }}
                             >
                                 Call Us
                             </button>
                             <div class="{{ $this->css('cxTimeZoneContainer') }}">
                                 <div>
-                                    <div class="{{ $this->css('cxRedDot') }}"></div>
+                                    @if($callIsAvailable)
+                                        <div class="{{ $this->css('cxGreenDot') }}"></div>
+                                    @else
+                                        <div class="{{ $this->css('cxRedDot') }}"></div>
+                                    @endif
                                 </div>
-                                <div class="{{ $this->css('cxTimeZoneText') }}">M-F 11AM-6PM EST</div>
+                                <div class="{{ $this->css('cxTimeZoneText') }}">
+                                    <span x-text="clientCallOpeningTime"></span> - <span x-text="clientCallClosingTime"></span> <span x-text="clientTimezone"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -121,23 +153,6 @@
         <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/timezone.js"></script>
-
-        <script>
-            window.dayjs().format()
-
-            window.dayjs.extend(window.dayjs_plugin_utc);
-            window.dayjs.extend(window.dayjs_plugin_timezone);
-
-            clientTimeZone = window.dayjs.tz.guess();
-
-            estTimeZone = 'America/New_York';
-
-            console.log('2024-01-01 {{ $callClosingTime }}');
-
-            clientTime = window.dayjs.utc('2024-01-01 {{ $callClosingTime }}').tz(estTimeZone).format('HH:mm:ss');
-
-            // converted to client's timezone
-            console.log(clientTime);
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/customParseFormat.js"></script>
     @endpush
 @endif
