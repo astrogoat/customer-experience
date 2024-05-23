@@ -34,13 +34,14 @@
             clientCallOpeningTime: '',
             clientCallClosingTime: '',
             convertToClientTimezone(time) {
-                const newTime = dayjs.utc(time, 'HH:mm:ss').tz(this.clientTimezone).format('HH:mm:ss');
-                return dayjs(newTime, 'HH:mm:ss').format('h:mm A');
+                return dayjs.utc(time, 'HH:mm:ss').tz(this.clientTimezone).format('h:mm A');
             }
-        }" x-init="() => {
-            dayjs.extend(window.dayjs_plugin_utc);
-            dayjs.extend(window.dayjs_plugin_timezone);
-            dayjs.extend(window.dayjs_plugin_customParseFormat);
+        }"
+        x-init="() => {
+            const { dayjs_plugin_utc, dayjs_plugin_timezone, dayjs_plugin_customParseFormat } = window;
+            dayjs.extend(dayjs_plugin_utc);
+            dayjs.extend(dayjs_plugin_timezone);
+            dayjs.extend(dayjs_plugin_customParseFormat);
 
             clientTimezone = window.dayjs.tz.guess();
 
