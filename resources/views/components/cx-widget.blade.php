@@ -37,7 +37,7 @@
                 return dayjs.utc(time, 'HH:mm:ss').tz(this.clientTimezone).format('h:mm A');
             }
         }"
-        x-init="() => {
+        x-init="$nextTick(() => {
             const { dayjs_plugin_utc, dayjs_plugin_timezone, dayjs_plugin_customParseFormat } = window;
             dayjs.extend(dayjs_plugin_utc);
             dayjs.extend(dayjs_plugin_timezone);
@@ -49,7 +49,7 @@
             clientChatClosingTime = convertToClientTimezone('{{ $chatClosingTime }}');
             clientCallOpeningTime = convertToClientTimezone('{{ $callOpeningTime }}');
             clientCallClosingTime = convertToClientTimezone('{{ $callClosingTime }}');
-        }"
+        })"
     >
         <div class="{{ $this->css('cxHeaderContainer') }}">
             <div>
@@ -67,6 +67,7 @@
                             <div class="{{ $this->css('cxHeaderButtonContainer') }}">
                             <button
                                 data-area="chat-now"
+                                @click="zE('messenger', 'open');"
                                 type="button"
                                 class="{{ $chatIsAvailable  ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
                                 aria-label="chat-now"
@@ -92,6 +93,7 @@
                             <div class="{{ $this->css('cxHeaderButtonContainer') }}">
                             <button
                                 data-area="call-now"
+                                @click="zE('messenger', 'open');"
                                 type="button"
                                 class="{{ $callIsAvailable ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
                                 aria-label="chat-now"
@@ -155,11 +157,4 @@
             @endforeach
         </div>
     </div>
-
-    @push('footer')
-        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/timezone.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/customParseFormat.js"></script>
-    @endpush
 @endif
