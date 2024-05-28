@@ -93,7 +93,7 @@
                             <div class="{{ $this->css('cxHeaderButtonContainer') }}">
                             <button
                                 data-area="call-now"
-                                @click="zE('messenger', 'open');"
+                                @click="window.location.href='tel:{{ app(Helix\Lego\Settings\ContactInformationSettings::class)->contact_phone_number }}'"
                                 type="button"
                                 class="{{ $callIsAvailable ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
                                 aria-label="chat-now"
