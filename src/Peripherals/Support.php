@@ -109,7 +109,6 @@ class Support extends Peripheral
         foreach ($this->cx_call_settings->toArray() as $settings) {
             $call_setting = CxCall::find($settings['id']);
 
-            ray(is_string($settings['call_is_available']));
             $call_setting->opening_time = DateTimeConverter::estToUtc($settings['opening_time']);
             $call_setting->closing_time = DateTimeConverter::estToUtc($settings['closing_time']);
             $call_setting->call_is_available = $settings['call_is_available'];
@@ -125,6 +124,7 @@ class Support extends Peripheral
 
         foreach ($this->cx_chat_settings->toArray() as $settings) {
             $chat_setting = CxChat::find($settings['id']);
+
             $chat_setting->opening_time = DateTimeConverter::estToUtc($settings['opening_time']);
             $chat_setting->closing_time = DateTimeConverter::estToUtc($settings['closing_time']);
             $chat_setting->chat_is_available = $settings['chat_is_available'];
