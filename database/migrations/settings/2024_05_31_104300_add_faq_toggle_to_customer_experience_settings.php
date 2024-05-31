@@ -13,4 +13,4 @@ return new class extends SettingsMigration
     {
         $this->migrator->delete('customer-experience.faq_enabled');
     }
-}
+};

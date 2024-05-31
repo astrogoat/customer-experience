@@ -19,4 +19,4 @@ return new class extends SettingsMigration
         $this->migrator->delete('customer-experience.chat_enabled');
 
     }
-}
+};
