@@ -29,6 +29,7 @@
         class="{{ $this->css('cxBackground') }}"
         x-data="{
             clientTimezone: '',
+            clientTimezoneAbbreviation: '',
             clientChatOpeningTime: '',
             clientChatClosingTime: '',
             clientCallOpeningTime: '',
@@ -38,12 +39,14 @@
             }
         }"
         x-init="$nextTick(() => {
-            const { dayjs_plugin_utc, dayjs_plugin_timezone, dayjs_plugin_customParseFormat } = window;
+            const { dayjs_plugin_utc, dayjs_plugin_timezone, dayjs_plugin_advancedFormat, dayjs_plugin_customParseFormat } = window;
             dayjs.extend(dayjs_plugin_utc);
             dayjs.extend(dayjs_plugin_timezone);
+            dayjs.extend(dayjs_plugin_advancedFormat);
             dayjs.extend(dayjs_plugin_customParseFormat);
 
             clientTimezone = window.dayjs.tz.guess();
+            clientTimezoneAbbreviation = dayjs().tz(clientTimezone).format('z');
 
             clientChatOpeningTime = convertToClientTimezone('{{ $chatOpeningTime }}');
             clientChatClosingTime = convertToClientTimezone('{{ $chatClosingTime }}');
@@ -84,7 +87,7 @@
                                     @endif
                                 </div>
                                 <div class="{{ $this->css('cxTimeZoneText') }}">
-                                    <span x-text="clientChatOpeningTime"></span> - <span x-text="clientChatClosingTime"></span> <span x-text="clientTimezone"></span>
+                                    <span x-text="clientChatOpeningTime"></span> - <span x-text="clientChatClosingTime"></span> <span x-text="clientTimezoneAbbreviation"></span>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +113,7 @@
                                     @endif
                                 </div>
                                 <div class="{{ $this->css('cxTimeZoneText') }}">
-                                    <span x-text="clientCallOpeningTime"></span> - <span x-text="clientCallClosingTime"></span> <span x-text="clientTimezone"></span>
+                                    <span x-text="clientCallOpeningTime"></span> - <span x-text="clientCallClosingTime"></span> <span x-text="clientTimezoneAbbreviation"></span>
                                 </div>
                             </div>
                         </div>
