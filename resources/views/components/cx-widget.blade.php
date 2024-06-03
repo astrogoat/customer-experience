@@ -123,7 +123,8 @@
             </div>
         </div>
 
-        <div class="{{ $this->css('cxFaqBackground') }}">
+        @if($cxAppSettingIsEnabled('faq_enabled'))
+            <div class="{{ $this->css('cxFaqBackground') }}">
             <div>
                 <div class="{{ $this->css('cxFaqDivider') }}">
                     @foreach(\Astrogoat\CustomerExperience\Models\Faq::all() as $faq)
@@ -153,7 +154,7 @@
                 </div>
             </div>
         </div>
-
+        @endif
         <div class="{{ $this->css('cxFooter') }}">
             @foreach(\Astrogoat\CustomerExperience\Models\SupportLink::limit(2)->get() as $link)
                 <a href="{{ $link->link_url }}" class="{{ $loop->index == 0 ? $this->css('cxLeftFooterLink') : $this->css('cxRightFooterLink') }}">{{ $link->link_copy }}</a>
