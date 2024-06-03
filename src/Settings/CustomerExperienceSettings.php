@@ -11,12 +11,14 @@ class CustomerExperienceSettings extends AppSettings
 {
     public bool $chat_enabled;
     public bool $call_enabled;
+    public bool $faq_enabled;
 
     public function rules()
     {
         return [
           'chat_enabled' => ['nullable','boolean'],
           'call_enabled' => ['nullable','boolean'],
+          'faq_enabled' => ['nullable','boolean'],
         ];
     }
 
