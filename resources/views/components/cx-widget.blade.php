@@ -54,7 +54,7 @@
     >
         <div class="cx-flex cx-gap-2 {{ $this->css('cxHeaderContainer') }}">
             <div>
-                <img src="{{ asset('images/cx-avatar.png') }}" class="cx-w-[50px] {{ $this->css('cxAvatarStyle') }}">
+                <img src="{{ $this->resources('cxAvatar') }}" class="cx-w-[50px] {{ $this->css('cxAvatarStyle') }}">
             </div>
             <div class="cx-w-full cx-flex cx-flex-col cx-text-base cx-leading-6 cx-font-semibold {{ $this->css('cxHeaderContentArea') }}">
                 <span>Have questions?</span>
@@ -145,7 +145,7 @@
                                             {{ $faq->faq_question }}
                                         </div>
                                         <div class="cx-flex cx-justify-end cx-items-center cx-transition-all cx-duration-300 group-open:cx-rotate-180 {{ $this->css('cxFaqChevron') }}">
-                                            <x-dynamic-component component="{{ $this->resources('cx-faq-chevron') }}"/>
+                                            <x-dynamic-component component="{{ $this->resources('cxFaqChevron') }}"/>
                                         </div>
                                     </div>
                                 </summary>
