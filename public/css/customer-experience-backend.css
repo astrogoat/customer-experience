@@ -1,0 +1,29 @@
+.cx-mt-4 {
+    margin-top: 1rem
+}
+.cx-mt-8 {
+    margin-top: 2rem
+}
+.cx-flex {
+    display: flex
+}
+.cx-grid {
+    display: grid
+}
+.cx-h-6 {
+    height: 1.5rem
+}
+.cx-grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+}
+.cx-items-center {
+    align-items: center
+}
+.cx-justify-between {
+    justify-content: space-between
+}
+.cx-gap-x-2 {
+    -moz-column-gap: 0.5rem;
+         column-gap: 0.5rem
+}
+

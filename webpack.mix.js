@@ -11,6 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.postCss('resources/css/customer-experience.css', 'public/css', [require("tailwindcss")])
-    // Uncomment if you need compiled Javascript
-    // .js('resources/js/customer-experience.js', 'public/js')
+mix
+    // .postCss('resources/css/customer-experience.css', 'public/css', [require("tailwindcss")])
+    .postCss('resources/css/customer-experience-backend.css', 'public/css', [require("tailwindcss")])
+    .js('resources/js/customer-experience.js', 'public/js')
