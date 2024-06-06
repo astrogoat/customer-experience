@@ -1,28 +1,27 @@
 @php
     use Carbon\Carbon;
     use Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings;
+    use Astrogoat\CustomerExperience\Models\OpeningHours;
+    use Astrogoat\CustomerExperience\Models\SupportLink;
 
-    $cxAppSettingIsEnabled = fn($setting) => settings(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class, $setting) === true;
-    $settings = app(\Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings::class)
+    $settings = app(CustomerExperienceSettings::class);
 @endphp
 
-@if($cxAppSettingIsEnabled('enabled'))
+@if($settings->enabled)
     @php
-        $chatIsEnabledInApp = $settings->chat_enabled === true;
-        $callIsEnabledInApp = $cxAppSettingIsEnabled('call_enabled');
-
         $currentTime = Carbon::now('UTC')->format('H:i:s');
 
-        $todayChatOpeningHours = \Astrogoat\CustomerExperience\Models\OpeningHours::chat()->today()->first();
-        $chatIsAvailable = $todayChatOpeningHours->enabled;
-        $chatOpeningTime = $todayChatOpeningHours->opening_time_in_utc;
-        $chatClosingTime = $todayChatOpeningHours->closing_time_in_utc;
-        $chatIsAvailable = $chatIsEnabledInApp && $todayChatOpeningHours->enabled && $currentTime >= $chatOpeningTime && $currentTime <= $chatClosingTime;
+        $chatToday = OpeningHours::chat()->today()->first();
+        $chatIsAvailable = $settings->chat_enabled
+            && $chatToday->enabled
+            && ($currentTime >= $chatToday->opening_time_in_utc)
+            && ($currentTime <= $chatToday->closing_time_in_utc);
 
-        $todayCallOpeningHours = \Astrogoat\CustomerExperience\Models\OpeningHours::call()->today()->first();
-        $callOpeningTime = $todayCallOpeningHours->opening_time_in_utc;
-        $callClosingTime = $todayCallOpeningHours->closing_time_in_utc;
-        $callIsAvailable = $callIsEnabledInApp && $todayCallOpeningHours->enabled && $callOpeningTime <= $currentTime && $currentTime <= $callClosingTime;
+        $callToday = OpeningHours::call()->today()->first();
+        $callIsAvailable = $settings->call_enabled
+            && $callToday->enabled
+            && ($currentTime >= $callToday->opening_time_in_utc)
+            && ($currentTime <= $callToday->closing_time_in_utc);
     @endphp
 
     <div
@@ -43,10 +42,10 @@
             clientTimezone = window.dayjs.tz.guess();
             clientTimezoneAbbreviation = dayjs().tz(clientTimezone).format('z');
 
-            clientChatOpeningTime = convertToClientTimezone('{{ $chatOpeningTime }}');
-            clientChatClosingTime = convertToClientTimezone('{{ $chatClosingTime }}');
-            clientCallOpeningTime = convertToClientTimezone('{{ $callOpeningTime }}');
-            clientCallClosingTime = convertToClientTimezone('{{ $callClosingTime }}');
+            clientChatOpeningTime = convertToClientTimezone('{{ $chatToday->opening_time_in_utc }}');
+            clientChatClosingTime = convertToClientTimezone('{{ $chatToday->closing_time_in_utc }}');
+            clientCallOpeningTime = convertToClientTimezone('{{ $callToday->opening_time_in_utc }}');
+            clientCallClosingTime = convertToClientTimezone('{{ $callToday->closing_time_in_utc }}');
         })"
     >
         <div class="{{ $this->css('cxHeaderContainer') }}">
@@ -61,7 +60,7 @@
                         Our Sleep Experts will help you feel confident in your mattress choice!
                     </div>
                     <div class="{{ $this->css('cxHeaderCtas') }}">
-                        @if($cxAppSettingIsEnabled('chat_enabled'))
+                        @if($settings->chat_enabled)
                             <div class="{{ $this->css('cxHeaderButtonContainer') }}">
                                 <button
                                     data-area="chat-now"
@@ -73,7 +72,8 @@
                                 >
                                     Chat Now
                                 </button>
-                                @if($todayCallOpeningHours->enabled)
+
+                                @if($chatToday->enabled)
                                     <div class="{{ $this->css('cxTimeZoneContainer') }}">
                                         <div>
                                             @if($chatIsAvailable)
@@ -83,14 +83,15 @@
                                             @endif
                                         </div>
                                         <div class="{{ $this->css('cxTimeZoneText') }}">
-                                            <span x-text="clientChatOpeningTime + ' - ' + clientChatClosingTime + ' ' + clientTimezoneAbbreviation"></span>
+                                            <span
+                                                x-text="clientChatOpeningTime + ' - ' + clientChatClosingTime + ' ' + clientTimezoneAbbreviation"></span>
                                         </div>
                                     </div>
                                 @endif
                             </div>
                         @endif
 
-                        @if($cxAppSettingIsEnabled('call_enabled'))
+                        @if($settings->call_enabled)
                             <div class="{{ $this->css('cxHeaderButtonContainer') }}">
                                 <button
                                     data-area="call-now"
@@ -102,7 +103,8 @@
                                 >
                                     Call Us
                                 </button>
-                                @if($todayCallOpeningHours->enabled)
+
+                                @if($callToday->enabled)
                                     <div class="{{ $this->css('cxTimeZoneContainer') }}">
                                         <div>
                                             @if($callIsAvailable)
@@ -112,7 +114,8 @@
                                             @endif
                                         </div>
                                         <div class="{{ $this->css('cxTimeZoneText') }}">
-                                            <span x-text="clientCallOpeningTime + ' - ' + clientCallClosingTime + ' ' + clientTimezoneAbbreviation"></span>
+                                            <span
+                                                x-text="clientCallOpeningTime + ' - ' + clientCallClosingTime + ' ' + clientTimezoneAbbreviation"></span>
                                         </div>
                                     </div>
                                 @endif
@@ -123,7 +126,7 @@
             </div>
         </div>
 
-        @if($cxAppSettingIsEnabled('faq_enabled'))
+        @if($settings->faq_enabled)
             <div class="{{ $this->css('cxFaqBackground') }}">
                 <div>
                     <div class="{{ $this->css('cxFaqDivider') }}">
@@ -155,8 +158,9 @@
                 </div>
             </div>
         @endif
+
         <div class="{{ $this->css('cxFooter') }}">
-            @foreach(\Astrogoat\CustomerExperience\Models\SupportLink::limit(2)->get() as $link)
+            @foreach(SupportLink::query()->limit(2)->get() as $link)
                 <a
                     href="{{ $link->link_url }}"
                     class="{{ $loop->index == 0 ? $this->css('cxLeftFooterLink') : $this->css('cxRightFooterLink') }}"
