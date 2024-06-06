@@ -2,9 +2,7 @@
 
 namespace Astrogoat\CustomerExperience\Models;
 
-use DateTimeZone;
 use Carbon\Carbon;
-use Carbon\CarbonTimeZone;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -12,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class OpeningHours extends Model
 {
-    const string CALL = 'call';
-    const string CHAT = 'chat';
+    public const string CALL = 'call';
+    public const string CHAT = 'chat';
 
     public $casts = [
-        'enabled' => 'bool'
+        'enabled' => 'bool',
     ];
 
     protected $table = 'customer_experience_opening_hours';

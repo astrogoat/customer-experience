@@ -2,17 +2,17 @@
 
 namespace Astrogoat\CustomerExperience\Peripherals;
 
-use Carbon\Carbon;
-use Helix\Lego\Strata;
-use Carbon\CarbonInterface;
-use Illuminate\Support\Str;
-use Helix\Lego\Apps\AppToken;
-use Illuminate\Support\Collection;
-use Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings;
 use Astrogoat\CustomerExperience\Models\OpeningHours as OpeningHoursModel;
+use Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Helix\Fabrick\Notification;
+use Helix\Lego\Apps\AppToken;
 use Helix\Lego\Http\Livewire\Traits\ProvidesFeedback;
 use Helix\Lego\Settings\Peripherals\Peripheral;
+use Helix\Lego\Strata;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class OpeningHours extends Peripheral
 {
@@ -98,6 +98,7 @@ class OpeningHours extends Peripheral
     {
         $group = Str::before($providerKey, ':');
         $key = Str::after($providerKey, ':');
+
         return collect($this->chatButtonActionProviders()[$group])
             ->firstWhere(fn (AppToken $appToken) => $appToken->key == $key);
     }
