@@ -12,13 +12,17 @@ class CustomerExperienceSettings extends AppSettings
     public bool $chat_enabled;
     public bool $call_enabled;
     public bool $faq_enabled;
+    public string $chat_button_action_provider;
+    public string $chat_button_action;
 
     public function rules()
     {
         return [
-          'chat_enabled' => ['nullable','boolean'],
-          'call_enabled' => ['nullable','boolean'],
-          'faq_enabled' => ['nullable','boolean'],
+          'chat_enabled' => ['nullable', 'boolean'],
+          'call_enabled' => ['nullable', 'boolean'],
+          'faq_enabled' => ['nullable', 'boolean'],
+          'chat_button_action_provider' => ['nullable', 'string'],
+          'chat_button_action' => ['nullable', 'string'],
         ];
     }
 
@@ -27,6 +31,14 @@ class CustomerExperienceSettings extends AppSettings
         Faqs::class,
         SupportLinks::class,
     ];
+
+    public function hidden(): array
+    {
+        return [
+            'chat_button_action_provider', // Are being set in Astrogoat\CustomerExperience\Peripherals\OpeningHours::class
+            'chat_button_action', // Are being set in Astrogoat\CustomerExperience\Peripherals\OpeningHours::class
+        ];
+    }
 
     public function labels(): array
     {
@@ -48,7 +60,7 @@ class CustomerExperienceSettings extends AppSettings
 
     public function description(): string
     {
-        return 'Interact with Customer Experience.';
+        return 'Help customers through the buying process.';
     }
 
     public static function group(): string

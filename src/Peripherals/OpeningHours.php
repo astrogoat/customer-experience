@@ -3,7 +3,12 @@
 namespace Astrogoat\CustomerExperience\Peripherals;
 
 use Carbon\Carbon;
+use Helix\Lego\Strata;
 use Carbon\CarbonInterface;
+use Illuminate\Support\Str;
+use Helix\Lego\Apps\AppToken;
+use Illuminate\Support\Collection;
+use Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings;
 use Astrogoat\CustomerExperience\Models\OpeningHours as OpeningHoursModel;
 use Helix\Fabrick\Notification;
 use Helix\Lego\Http\Livewire\Traits\ProvidesFeedback;
@@ -15,6 +20,10 @@ class OpeningHours extends Peripheral
 
     public $chat;
     public $call;
+    public CustomerExperienceSettings $settings;
+    public string $chatButtonAction;
+    public $chatButtonActionProvider = null;
+    protected $chatButtonActionToken;
 
     public function rules()
     {
@@ -25,6 +34,8 @@ class OpeningHours extends Peripheral
             'call.*.enabled' => ['required'],
             'call.*.opening_time' => ['required'],
             'call.*.closing_time' => ['required'],
+            'chatButtonActionProvider' => ['required'],
+            'chatButtonAction' => ['required'],
         ];
     }
 
@@ -34,6 +45,9 @@ class OpeningHours extends Peripheral
 
         $this->chat = OpeningHoursModel::query()->chat()->get();
         $this->call = OpeningHoursModel::query()->call()->get();
+        $this->settings = app(CustomerExperienceSettings::class);
+        $this->chatButtonActionProvider = $this->settings->chat_button_action_provider;
+        $this->chatButtonAction = $this->settings->chat_button_action;
     }
 
     public function seedDatabase(): void
@@ -67,6 +81,35 @@ class OpeningHours extends Peripheral
         }
     }
 
+    public function chatButtonActionProviders(): Collection
+    {
+        return collect(app(Strata::class)->appTokens())
+            ->put('custom', [
+                AppToken::name('Custom action')
+                    ->group('custom')
+                    ->key('custom')
+                    ->value('')
+                    ->description('Add your own custom onclick Javascript action')
+                    ->type(AppToken::TYPE_TEXT),
+            ]);
+    }
+
+    protected function findTokenByProviderKey(string $providerKey): ?AppToken
+    {
+        $group = Str::before($providerKey, ':');
+        $key = Str::after($providerKey, ':');
+        return collect($this->chatButtonActionProviders()[$group])
+            ->firstWhere(fn (AppToken $appToken) => $appToken->key == $key);
+    }
+
+    public function updatedChatButtonActionProvider(string $providerKey): void
+    {
+        $token = $this->findTokenByProviderKey($providerKey);
+
+        $this->chatButtonAction = $token?->value ?: '';
+        $this->chatButtonActionToken = $token;
+    }
+
     public function saveChat(): void
     {
         $this->validate();
@@ -74,6 +117,10 @@ class OpeningHours extends Peripheral
         foreach ($this->chat as $day) {
             $day->save();
         }
+
+        $this->settings->chat_button_action_provider = $this->chatButtonActionProvider;
+        $this->settings->chat_button_action = $this->chatButtonAction;
+        $this->settings->save();
 
         $this->notify(Notification::success(title: 'Saved', message: 'Chat opening times have been saved.')->autoDismiss());
     }

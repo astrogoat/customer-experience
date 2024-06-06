@@ -64,7 +64,7 @@
                             <div class="{{ $this->css('cxHeaderButtonContainer') }}">
                                 <button
                                     data-area="chat-now"
-                                    @click="zE('messenger', 'open');"
+                                    x-on:click="{{ $settings->chat_button_action }}"
                                     type="button"
                                     class="{{ $chatIsAvailable  ? $this->css('cxButton') : $this->css('cxButtonDisabled') }}"
                                     aria-label="chat-now"

@@ -40,13 +40,13 @@ class OpeningHours extends Model
     public function dayDisplayName(): string
     {
         return match ($this->day) {
-            CarbonInterface::MONDAY => 'Monday',
-            CarbonInterface::TUESDAY => 'Tuesday',
-            CarbonInterface::WEDNESDAY => 'Wednesday',
-            CarbonInterface::THURSDAY => 'Thursday',
-            CarbonInterface::FRIDAY => 'Friday',
-            CarbonInterface::SATURDAY => 'Saturday',
-            CarbonInterface::SUNDAY => 'Sunday',
+            CarbonInterface::MONDAY => __('Monday'),
+            CarbonInterface::TUESDAY => __('Tuesday'),
+            CarbonInterface::WEDNESDAY => __('Wednesday'),
+            CarbonInterface::THURSDAY => __('Thursday'),
+            CarbonInterface::FRIDAY => __('Friday'),
+            CarbonInterface::SATURDAY => __('Saturday'),
+            CarbonInterface::SUNDAY => __('Sunday'),
         };
     }
 
