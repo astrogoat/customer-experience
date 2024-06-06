@@ -1,40 +1,43 @@
 {
-    "name": "customer-experience",
-    "version": "0.1.0",
-    "description": "[![Latest Version on Packagist](https://img.shields.io/packagist/v/astrogoat/customer-experience.svg?style=flat-square)](https://packagist.org/packages/astrogoat/customer-experience) [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/astrogoat/customer-experience/run-tests?label=tests)](https://github.com/astrogoat/customer-experience/actions?query=workflow%3Arun-tests+branch%3Amain) [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/astrogoat/customer-experience/Check%20&%20fix%20styling?label=code%20style)](https://github.com/astrogoat/customer-experience/actions?query=workflow%3A\"Check+%26+fix+styling\"+branch%3Amain) [![Total Downloads](https://img.shields.io/packagist/dt/astrogoat/customer-experience.svg?style=flat-square)](https://packagist.org/packages/astrogoat/customer-experience)",
-    "directories": {
-        "test": "tests"
-    },
-    "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "release": "gh workflow run release.yml",
-        "release:patch": "gh workflow run release.yml --field level=patch",
-        "release:minor": "gh workflow run release.yml --field level=minor",
-        "release:major": "gh workflow run release.yml --field level=major"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/astrogoat/customer-experience.git"
-    },
-    "keywords": [
-        "strata",
-        "customer-experience"
-    ],
-    "author": "Kofi Ramos",
-    "license": "UNLICENSED",
-    "bugs": {
-        "url": "https://github.com/astrogoat/customer-experience/issues"
-    },
-    "homepage": "https://github.com/astrogoat/customer-experience#readme",
-    "devDependencies": {
-        "laravel-mix": "^6.0.49",
-        "tailwindcss": "^3.4.1"
-    }
+  "name": "customer-experience",
+  "version": "0.1.0",
+  "description": "[![Latest Version on Packagist](https://img.shields.io/packagist/v/astrogoat/customer-experience.svg?style=flat-square)](https://packagist.org/packages/astrogoat/customer-experience) [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/astrogoat/customer-experience/run-tests?label=tests)](https://github.com/astrogoat/customer-experience/actions?query=workflow%3Arun-tests+branch%3Amain) [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/astrogoat/customer-experience/Check%20&%20fix%20styling?label=code%20style)](https://github.com/astrogoat/customer-experience/actions?query=workflow%3A\"Check+%26+fix+styling\"+branch%3Amain) [![Total Downloads](https://img.shields.io/packagist/dt/astrogoat/customer-experience.svg?style=flat-square)](https://packagist.org/packages/astrogoat/customer-experience)",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "gh workflow run release.yml",
+    "release:patch": "gh workflow run release.yml --field level=patch",
+    "release:minor": "gh workflow run release.yml --field level=minor",
+    "release:major": "gh workflow run release.yml --field level=major"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/astrogoat/customer-experience.git"
+  },
+  "keywords": [
+    "strata",
+    "customer-experience"
+  ],
+  "author": "Kofi Ramos",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/astrogoat/customer-experience/issues"
+  },
+  "homepage": "https://github.com/astrogoat/customer-experience#readme",
+  "devDependencies": {
+    "laravel-mix": "^6.0.49",
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.11"
+  }
 }
