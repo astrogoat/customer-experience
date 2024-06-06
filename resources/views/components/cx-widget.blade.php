@@ -1,8 +1,8 @@
 @php
-    use Carbon\Carbon;
     use Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings;
     use Astrogoat\CustomerExperience\Models\OpeningHours;
     use Astrogoat\CustomerExperience\Models\SupportLink;
+    use Carbon\Carbon;
 
     $settings = app(CustomerExperienceSettings::class);
 @endphp
@@ -88,7 +88,8 @@
                                         </div>
                                         <div class="cx--mt-[3px] cx-text-xs cx-font-normal {{ $this->css('cxTimeZoneText') }}">
                                             <span
-                                                x-text="clientChatOpeningTime + ' - ' + clientChatClosingTime + ' ' + clientTimezoneAbbreviation"></span>
+                                                x-text="clientChatOpeningTime + ' - ' + clientChatClosingTime + ' ' + clientTimezoneAbbreviation"
+                                            ></span>
                                         </div>
                                     </div>
                                 @endif
@@ -119,7 +120,8 @@
                                         </div>
                                         <div class="cx--mt-[3px] cx-text-xs cx-font-normal {{ $this->css('cxTimeZoneText') }}">
                                             <span
-                                                x-text="clientCallOpeningTime + ' - ' + clientCallClosingTime + ' ' + clientTimezoneAbbreviation"></span>
+                                                x-text="clientCallOpeningTime + ' - ' + clientCallClosingTime + ' ' + clientTimezoneAbbreviation"
+                                            ></span>
                                         </div>
                                     </div>
                                 @endif
