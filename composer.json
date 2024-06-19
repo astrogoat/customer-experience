@@ -22,8 +22,8 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "astrogoat/strata": "^0.3.0|^0.4.0|^0.5.0|^0.6.0",
+        "php": "^8.3",
+        "astrogoat/strata": "^0.7.4",
         "illuminate/contracts": "^8.37 || ^9.9|^10.0",
         "spatie/laravel-package-tools": "^1.4.3"
     },
@@ -36,9 +36,6 @@
         "vimeo/psalm": "^4.8|^5.15"
     },
     "autoload": {
-        "files": [
-            "src/Helpers/DateTimeConverter.php"
-        ],
         "psr-4": {
             "Astrogoat\\CustomerExperience\\": "src",
             "Astrogoat\\CustomerExperience\\Database\\Factories\\": "database/factories"

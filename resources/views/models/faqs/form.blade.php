@@ -17,15 +17,14 @@
 
     <x-lego::feedback.errors class="mb-4" />
 
-
     <x-fab::layouts.main-with-aside>
         <x-slot name="aside">
             @if($model->exists)
-            <x-lego::media-panel :model="$model" />
+                <x-lego::media-panel :model="$model" />
             @else
-            <x-fab::feedback.alert type="info">
-            Please save faqs before you can attach media to it.
-            </x-fab::feedback.alert>
+                <x-fab::feedback.alert type="info">
+                    Please save faqs before you can attach media to it.
+                </x-fab::feedback.alert>
             @endif
         </x-slot>
 
@@ -42,7 +41,5 @@
                 wire:model.lazy="model.faq_answer"
             />
         </x-fab::layouts.panel>
-
     </x-fab::layouts.main-with-aside>
-
 </x-fab::layouts.page>
