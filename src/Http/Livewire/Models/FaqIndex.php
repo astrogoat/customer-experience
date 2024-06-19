@@ -5,7 +5,7 @@ namespace Astrogoat\CustomerExperience\Http\Livewire\Models;
 use Astrogoat\CustomerExperience\Models\Faq;
 use Helix\Lego\Http\Livewire\Models\Index;
 
-class FaqsIndex extends Index
+class FaqIndex extends Index
 {
     public function model(): string
     {

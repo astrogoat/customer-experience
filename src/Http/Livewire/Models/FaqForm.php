@@ -5,7 +5,7 @@ namespace Astrogoat\CustomerExperience\Http\Livewire\Models;
 use Astrogoat\CustomerExperience\Models\Faq;
 use Helix\Lego\Http\Livewire\Models\Form;
 
-class FaqsForm extends Form
+class FaqForm extends Form
 {
     public function rules()
     {
