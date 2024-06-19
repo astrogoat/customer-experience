@@ -88,7 +88,7 @@ class OpeningHours extends Peripheral
                 AppToken::name('Custom action')
                     ->group('custom')
                     ->key('custom')
-                    ->value('')
+                    ->value('custom')
                     ->description('Add your own custom onclick Javascript action')
                     ->type(AppToken::TYPE_TEXT),
             ]);
