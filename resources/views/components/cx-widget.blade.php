@@ -147,7 +147,7 @@
                                             {{ $faq->faq_question }}
                                         </div>
                                         <div class="cx-flex cx-justify-end cx-items-center cx-transition-all cx-duration-300 group-open:cx-rotate-180 {{ $this->css('cxFaqChevron') }}">
-                                            <x-dynamic-component component="{{ $this->resources('cxFaqChevron') }}"/>
+                                            <x-dynamic-component component="{{ $this->resources('cxFaqChevron') }}" class="h-6"/>
                                         </div>
                                     </div>
                                 </summary>
@@ -169,7 +169,7 @@
             @foreach(SupportLink::query()->limit(2)->get() as $link)
                 <a
                     href="{{ $link->link_url }}"
-                    class="cx-underline cx-capitalize {{ $loop->index == 0 ? 'cx-text-right ' . $this->css('cxLeftFooterLink') : $this->css('cxRightFooterLink') }}"
+                    class="cx-underline cx-capitalize {{ $loop->index == 0 ? 'cx-text-right ' : '' }} {{ $this->css('cxFooterLink') }}"
                 >
                     {{ $link->link_copy }}
                 </a>
