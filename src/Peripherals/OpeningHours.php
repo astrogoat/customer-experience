@@ -99,6 +99,10 @@ class OpeningHours extends Peripheral
         $group = Str::before($providerKey, ':');
         $key = Str::after($providerKey, ':');
 
+        if (empty($key)) {
+            return null;
+        }
+
         return collect($this->chatButtonActionProviders()[$group])
             ->firstWhere(fn (AppToken $appToken) => $appToken->key == $key);
     }
