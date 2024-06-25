@@ -137,13 +137,13 @@
                 <div>
                     <div class="cx-divide-y-2 {{ $this->css('cxFaqDivider') }}">
                         @foreach(\Astrogoat\CustomerExperience\Models\Faq::all() as $faq)
-                            <details class="cx-group cx-w-full cx-group cx-px-4 {{ $this->css('cxFaqWrapper') }}">
-                                <summary class="cx-w-full cx-flex cx-gap-2 cx-cursor-pointer cx-list-none cx-items-center cx-py-4 cx-text-sm cx-font-semibold {{ $this->css('cxFaqTitleContainer') }}">
+                            <details class="cx-group cx-w-full cx-group cx-px-4 {{ $this->css('cxFaqText') }}">
+                                <summary class="cx-w-full cx-flex cx-gap-2 cx-cursor-pointer cx-list-none cx-items-center cx-py-4 cx-text-sm cx-font-semibold">
                                     <div class="cx-w-8 cx-flex cx-items-center {{ $this->css('cxFaqTitleArea') }}">
                                         {!! $faq->getFirstMedia('Icon')->class('cx-w-full cx-object-contain ' . $this->css('cxFaqTitleIcon')) !!}
                                     </div>
                                     <div class="cx-w-full cx-flex cx-gap-3 cx-justify-between cx-items-center {{ $this->css('cxFaqTitleAndChevron') }}">
-                                        <div class="cx-text-base cx-font-semibold {{ $this->css('cxFaqTitle') }}">
+                                        <div class="cx-text-sm cx-font-semibold">
                                             {{ $faq->faq_question }}
                                         </div>
                                         <div class="cx-flex cx-justify-end cx-items-center cx-transition-all cx-duration-300 group-open:cx-rotate-180 {{ $this->css('cxFaqChevron') }}">
@@ -152,7 +152,7 @@
                                     </div>
                                 </summary>
                                 <div>
-                                    <div class="cx-transition-all cx-ease-in-out cx-delay-150 cx-pb-4 cx-text-base cx-font-normal cx-pl-[40px] cx-pr-[11px] {{ $this->css('cxFaqDescription') }}">
+                                    <div class="cx-transition-all cx-ease-in-out cx-delay-150 cx-pb-4 cx-text-sm cx-font-normal cx-pl-[40px] cx-pr-[11px]">
                                         <p>
                                             {!! $faq->faq_answer !!}
                                         </p>
