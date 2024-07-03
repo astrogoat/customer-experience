@@ -99,7 +99,7 @@ class OpeningHours extends Peripheral
         $group = Str::before($providerKey, ':');
         $key = Str::after($providerKey, ':');
 
-        if (empty($key)) {
+        if (blank($providerKey) || blank($group)) {
             return null;
         }
 
