@@ -7,10 +7,6 @@
     $settings = app(CustomerExperienceSettings::class);
 @endphp
 
-@push('strata:frontend:head')
-    <link rel="stylesheet" href="{{ mix('css/customer-experience.css', 'vendor/customer-experience') }}">
-@endpush
-
 @if($settings->enabled)
     @php
         $currentTime = Carbon::now('UTC')->format('H:i:s');
@@ -27,6 +23,19 @@
             && ($currentTime >= $callToday->opening_time_in_utc)
             && ($currentTime <= $callToday->closing_time_in_utc);
     @endphp
+
+    @once
+        <x-lego::app-asset
+            asset="js/customer-experience.js"
+            :type="Helix\Lego\Enums\AppAsset::SCRIPT"
+            vendor="customer-experience"
+        />
+        <x-lego::app-asset
+            asset="css/customer-experience.css"
+            :type="Helix\Lego\Enums\AppAsset::STYLESHEET"
+            vendor="customer-experience"
+        />
+    @endonce
 
     <div
         data-area="cx"
