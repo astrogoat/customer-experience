@@ -1,2 +1,11 @@
 @tailwind components;
 @tailwind utilities;
+
+/* Safari-specific styles to hide the default disclosure icon */
+summary::marker, summary::-webkit-details-marker {
+    display: none !important;
+}
+
+.cx-text-center {
+    text-align: center;
+}

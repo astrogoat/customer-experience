@@ -70,7 +70,7 @@
                     <div class="cx-mt-1 cx-text-sm cx-font-normal {{ $this->css('cxHeaderDescription') }}">
                         Our Sleep Experts will help you feel confident in your mattress choice!
                     </div>
-                    <div class="cx-mt-4 cx-grid cx-grid-cols-2 cx-gap-4 {{ $this->css('cxHeaderCtas') }}">
+                    <div class="cx-mt-4 cx-flex cx-gap-4 {{ $this->css('cxHeaderCtas') }}">
                         @if($settings->chat_enabled)
                             <div class="cx-flex-1 cx-w-full cx-flex cx-flex-col cx-gap-2 {{ $this->css('cxHeaderButtonContainer') }}">
                                 <button
@@ -144,7 +144,7 @@
                 <div>
                     <div class="cx-divide-y-2 {{ $this->css('cxFaqDivider') }}">
                         @foreach(\Astrogoat\CustomerExperience\Models\Faq::all() as $faq)
-                            <details class="cx-group cx-w-full cx-group cx-px-4 {{ $this->css('cxFaqText') }}">
+                            <details class="before:hidden cx-group cx-w-full cx-group cx-px-4 {{ $this->css('cxFaqText') }}">
                                 <summary class="cx-w-full cx-flex cx-gap-2 cx-cursor-pointer cx-list-none cx-items-center cx-py-4 cx-text-sm cx-font-semibold">
                                     <div class="cx-w-8 cx-flex cx-items-center {{ $this->css('cxFaqTitleArea') }}">
                                         {!! $faq->getFirstMedia('Icon')->class('cx-w-full cx-object-contain ' . $this->css('cxFaqTitleIcon')) !!}
@@ -172,11 +172,14 @@
             </div>
         @endif
 
-        <div class="cx-grid cx-grid-cols-2 cx-gap-6 cx-font-semibold cx-text-base {{ $this->css('cxFooter') }}">
-            @foreach(SupportLink::query()->limit(2)->get() as $link)
+        <div class="cx-flex cx-items-center cx-gap-6 cx-font-semibold cx-text-base {{ $this->css('cxFooter') }}">
+            @php
+                $enabledSupportLinks = SupportLink::where('enabled', true)->limit(2)->get();
+            @endphp
+            @foreach($enabledSupportLinks as $link)
                 <a
                     href="{{ $link->link_url }}"
-                    class="cx-underline cx-capitalize {{ $loop->index == 0 ? 'cx-text-right ' : '' }} {{ $this->css('cxFooterLink') }}"
+                    class="cx-flex-1 cx-underline cx-capitalize {{ $loop->index == 0 ? 'cx-text-right ' : '' }} {{ $this->css('cxFooterLink') }} {{ count($enabledSupportLinks) === 1 ? 'cx-text-center' : '' }}"
                 >
                     {{ $link->link_copy }}
                 </a>
