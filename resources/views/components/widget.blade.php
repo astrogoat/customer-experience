@@ -144,7 +144,7 @@
                 <div>
                     <div class="cx-divide-y-2 {{ $this->css('cxFaqDivider') }}">
                         @foreach(\Astrogoat\CustomerExperience\Models\Faq::all() as $faq)
-                            <details class="before:hidden cx-group cx-w-full cx-group cx-px-4 {{ $this->css('cxFaqText') }}">
+                            <details class="cx-group cx-w-full cx-group cx-px-4 {{ $this->css('cxFaqText') }}">
                                 <summary class="cx-w-full cx-flex cx-gap-2 cx-cursor-pointer cx-list-none cx-items-center cx-py-4 cx-text-sm cx-font-semibold">
                                     <div class="cx-w-8 cx-flex cx-items-center {{ $this->css('cxFaqTitleArea') }}">
                                         {!! $faq->getFirstMedia('Icon')->class('cx-w-full cx-object-contain ' . $this->css('cxFaqTitleIcon')) !!}
