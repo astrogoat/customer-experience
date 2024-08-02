@@ -9,19 +9,36 @@
 
 @if($settings->enabled)
     @php
-        $currentTime = Carbon::now('UTC')->format('H:i:s');
+        $currentTime = Carbon::now('UTC');
 
+        // Chat
         $chatToday = OpeningHours::chat()->today()->first();
+        $chatOpeningTime = $currentTime->copy()->setTimeFrom($chatToday->opening_time_in_utc);
+        $chatClosingTime = $currentTime->copy()->setTimeFrom($chatToday->closing_time_in_utc);
+
+        if ($chatClosingTime->lessThan($chatOpeningTime)) {
+            $chatClosingTime->addDay();
+        }
+
         $chatIsAvailable = $settings->chat_enabled
             && $chatToday->enabled
-            && ($currentTime >= $chatToday->opening_time_in_utc)
-            && ($currentTime <= $chatToday->closing_time_in_utc);
+            && $currentTime->greaterThanOrEqualTo($chatOpeningTime)
+            && $currentTime->lessThan($chatClosingTime);
 
+
+        // Call
         $callToday = OpeningHours::call()->today()->first();
+        $callOpeningTime = $currentTime->copy()->setTimeFrom($callToday->opening_time_in_utc);
+        $callClosingTime = $currentTime->copy()->setTimeFrom($callToday->closing_time_in_utc);
+
+        if ($callClosingTime->lessThan($callOpeningTime)) {
+            $callClosingTime->addDay();
+        }
+
         $callIsAvailable = $settings->call_enabled
             && $callToday->enabled
-            && ($currentTime >= $callToday->opening_time_in_utc)
-            && ($currentTime <= $callToday->closing_time_in_utc);
+            && $currentTime->greaterThanOrEqualTo($callOpeningTime)
+            && $currentTime->lessThan($callClosingTime);
     @endphp
 
     <x-lego::app-asset
