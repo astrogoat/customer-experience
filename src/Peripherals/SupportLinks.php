@@ -54,7 +54,6 @@ class SupportLinks extends Peripheral
     {
 
         $this->validate();
-        ray($this->validate());
 
         SupportLink::updateOrCreate(
             ['id' => 1],
