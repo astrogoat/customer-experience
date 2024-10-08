@@ -12,3 +12,7 @@ Route::group([
     Route::get('/create', FaqForm::class)->name('create');
     Route::get('/{faq}/edit', FaqForm::class)->name('edit');
 });
+
+Route::get('apps/customer-experience',function(){
+    return redirect('/admin/apps/customer-experience');
+})->name('customer-experience.index');
