@@ -3,7 +3,7 @@
     :breadcrumbs="[
         ['title' => 'Home', 'url' => route('lego.dashboard')],
         ['title' => 'Apps', 'url' => route('lego.apps.index')],
-		['title' => 'Customer Experience', 'url' => route('lego.customer-experience.index')],
+		['title' => 'Customer Experience', 'url' => route('lego.apps.edit', 'customer-experience')],
         ['title' => 'FAQs','url' => route('lego.customer-experience.faqs.index')],
         ['title' => $model->faq_question ?: 'New FAQs'],
     ]"
