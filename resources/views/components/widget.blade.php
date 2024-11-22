@@ -164,7 +164,7 @@
                             <details class="cx-group cx-w-full cx-group cx-px-4 {{ $this->css('cxFaqText') }}">
                                 <summary class="cx-w-full cx-flex cx-gap-2 cx-cursor-pointer cx-list-none cx-items-center cx-py-4 cx-text-sm cx-font-semibold">
                                     <div class="cx-w-8 cx-flex cx-items-center {{ $this->css('cxFaqTitleArea') }}">
-                                        {!! $faq->load('media')->getFirstMedia('Icon')->class('cx-w-full cx-object-contain ' . $this->css('cxFaqTitleIcon')) !!}
+                                        {!! $faq->loadMissing('media')->getFirstMedia('Icon')->class('cx-w-full cx-object-contain ' . $this->css('cxFaqTitleIcon')) !!}
                                     </div>
                                     <div class="cx-w-full cx-flex cx-gap-3 cx-justify-between cx-items-center {{ $this->css('cxFaqTitleAndChevron') }}">
                                         <div class="cx-text-sm cx-font-semibold">
