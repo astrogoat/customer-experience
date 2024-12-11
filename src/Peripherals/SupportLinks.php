@@ -3,7 +3,6 @@
 namespace Astrogoat\CustomerExperience\Peripherals;
 
 use Astrogoat\CustomerExperience\Models\SupportLink;
-
 use Helix\Fabrick\Notification;
 use Helix\Lego\Http\Livewire\Traits\ProvidesFeedback;
 use Helix\Lego\Settings\Peripherals\Peripheral;
