@@ -3,7 +3,6 @@
 namespace Astrogoat\CustomerExperience\Peripherals;
 
 use Astrogoat\CustomerExperience\Models\OpeningHours as OpeningHoursModel;
-use Astrogoat\CustomerExperience\Settings\CustomerExperienceSettings;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Helix\Fabrick\Notification;
@@ -20,7 +19,6 @@ class OpeningHours extends Peripheral
 
     public $chat;
     public $call;
-    public CustomerExperienceSettings $settings;
     public string $chatButtonAction;
     public $chatButtonActionProvider = null;
     protected $chatButtonActionToken;
@@ -45,7 +43,6 @@ class OpeningHours extends Peripheral
 
         $this->chat = OpeningHoursModel::query()->chat()->get();
         $this->call = OpeningHoursModel::query()->call()->get();
-        $this->settings = app(CustomerExperienceSettings::class);
         $this->chatButtonActionProvider = $this->settings->chat_button_action_provider;
         $this->chatButtonAction = $this->settings->chat_button_action;
     }
