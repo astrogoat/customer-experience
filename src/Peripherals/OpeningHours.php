@@ -23,7 +23,7 @@ class OpeningHours extends Peripheral
     public $chatButtonActionProvider = null;
     protected $chatButtonActionToken;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'chat.*.enabled' => ['required'],
