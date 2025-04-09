@@ -26,7 +26,7 @@
             $chatClosingTime->addDay();
         }
 
-        $chatIsAvailable = $settings->chat_enabled
+        $chatIsAvailable = $chatEnabled
             && $chatToday->enabled
             && $currentTime->greaterThanOrEqualTo($chatOpeningTime)
             && $currentTime->lessThan($chatClosingTime);
@@ -177,7 +177,7 @@
                                             {{ $faq->faq_question }}
                                         </div>
                                         <div class="cx-flex cx-justify-end cx-items-center cx-transition-all cx-duration-300 group-open:cx-rotate-180 {{ $this->css('cxFaqChevron') }}">
-                                            {{-- <x-dynamic-component component="{{ $this->resources('cxFaqChevron') }}" class="h-6"/> --}}
+                                            <x-dynamic-component component="{{ $this->resources('cxFaqChevron') }}" class="h-6"/>
                                         </div>
                                     </div>
                                 </summary>
