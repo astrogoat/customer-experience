@@ -7,6 +7,12 @@
     $settings = app(CustomerExperienceSettings::class);
 @endphp
 
+@props([
+    'chatEnabled' => false,
+    'callEnabled' => false,
+    'faqEnabled' => false,
+    ])
+
 @if($settings->enabled)
     @php
         $currentTime = Carbon::now('UTC');
@@ -35,7 +41,7 @@
             $callClosingTime->addDay();
         }
 
-        $callIsAvailable = $settings->call_enabled
+        $callIsAvailable = $callEnabled
             && $callToday->enabled
             && $currentTime->greaterThanOrEqualTo($callOpeningTime)
             && $currentTime->lessThan($callClosingTime);
@@ -88,7 +94,7 @@
                         Our Sleep Experts will help you feel confident in your mattress choice!
                     </div>
                     <div class="cx-mt-4 cx-flex cx-gap-4 {{ $this->css('cxHeaderCtas') }}">
-                        @if($settings->chat_enabled)
+                        @if($chatEnabled)
                             <div class="cx-flex-1 cx-w-full cx-flex cx-flex-col cx-gap-2 {{ $this->css('cxHeaderButtonContainer') }}">
                                 <button
                                     data-area="chat-now"
@@ -120,7 +126,7 @@
                             </div>
                         @endif
 
-                        @if($settings->call_enabled)
+                        @if($callEnabled)
                             <div class="cx-flex-1 cx-w-full cx-flex cx-flex-col cx-gap-2 {{ $this->css('cxHeaderButtonContainer') }}">
                                 <button
                                     data-area="call-now"
@@ -156,7 +162,7 @@
             </div>
         </div>
 
-        @if($settings->faq_enabled)
+        @if($faqEnabled)
             <div class="{{ $this->css('cxFaqBackground') }}">
                 <div>
                     <div class="cx-divide-y-2 {{ $this->css('cxFaqDivider') }}">
@@ -171,7 +177,7 @@
                                             {{ $faq->faq_question }}
                                         </div>
                                         <div class="cx-flex cx-justify-end cx-items-center cx-transition-all cx-duration-300 group-open:cx-rotate-180 {{ $this->css('cxFaqChevron') }}">
-                                            <x-dynamic-component component="{{ $this->resources('cxFaqChevron') }}" class="h-6"/>
+                                            {{-- <x-dynamic-component component="{{ $this->resources('cxFaqChevron') }}" class="h-6"/> --}}
                                         </div>
                                     </div>
                                 </summary>
