@@ -11,7 +11,7 @@
     'chatEnabled' => false,
     'callEnabled' => false,
     'faqEnabled' => false,
-    ])
+])
 
 @if($settings->enabled)
     @php
