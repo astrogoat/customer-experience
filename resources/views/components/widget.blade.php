@@ -84,7 +84,7 @@
     >
         <div class="cx-flex cx-gap-2 {{ $this->css('cxHeaderContainer') }}">
             <div>
-                <img src="{{ $this->resources('cxAvatar') }}" class="cx-w-[50px] {{ $this->css('cxAvatarStyle') }}">
+                <img alt="Customer experience avatar" src="{{ $this->resources('cxAvatar') }}" class="cx-w-[50px] {{ $this->css('cxAvatarStyle') }}">
             </div>
             <div class="cx-w-full cx-flex cx-flex-col cx-text-base cx-leading-6 cx-font-semibold {{ $this->css('cxHeaderContentArea') }}">
                 <span>Have questions?</span>
