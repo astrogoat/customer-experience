@@ -7,12 +7,6 @@
     $settings = app(CustomerExperienceSettings::class);
 @endphp
 
-@props([
-    'chatEnabled' => false,
-    'callEnabled' => false,
-    'faqEnabled' => false,
-])
-
 @if($settings->enabled)
     @php
         $currentTime = Carbon::now('UTC');
@@ -26,7 +20,7 @@
             $chatClosingTime->addDay();
         }
 
-        $chatIsAvailable = $chatEnabled
+        $chatIsAvailable = $settings->chat_enabled
             && $chatToday->enabled
             && $currentTime->greaterThanOrEqualTo($chatOpeningTime)
             && $currentTime->lessThan($chatClosingTime);
@@ -41,7 +35,7 @@
             $callClosingTime->addDay();
         }
 
-        $callIsAvailable = $callEnabled
+        $callIsAvailable = $settings->call_enabled
             && $callToday->enabled
             && $currentTime->greaterThanOrEqualTo($callOpeningTime)
             && $currentTime->lessThan($callClosingTime);
@@ -94,7 +88,7 @@
                         Our Sleep Experts will help you feel confident in your mattress choice!
                     </div>
                     <div class="cx-mt-4 cx-flex cx-gap-4 {{ $this->css('cxHeaderCtas') }}">
-                        @if($chatEnabled)
+                        @if($settings->chat_enabled)
                             <div class="cx-flex-1 cx-w-full cx-flex cx-flex-col cx-gap-2 {{ $this->css('cxHeaderButtonContainer') }}">
                                 <button
                                     data-area="chat-now"
@@ -126,7 +120,7 @@
                             </div>
                         @endif
 
-                        @if($callEnabled)
+                        @if($settings->call_enabled)
                             <div class="cx-flex-1 cx-w-full cx-flex cx-flex-col cx-gap-2 {{ $this->css('cxHeaderButtonContainer') }}">
                                 <button
                                     data-area="call-now"
@@ -162,7 +156,7 @@
             </div>
         </div>
 
-        @if($faqEnabled)
+        @if($settings->faq_enabled)
             <div class="{{ $this->css('cxFaqBackground') }}">
                 <div>
                     <div class="cx-divide-y-2 {{ $this->css('cxFaqDivider') }}">
