@@ -47,17 +47,6 @@
             && $currentTime->lessThan($callClosingTime);
     @endphp
 
-    <x-lego::app-asset
-        asset="js/customer-experience.js"
-        :type="Helix\Lego\Enums\AppAsset::SCRIPT"
-        vendor="customer-experience"
-    />
-    <x-lego::app-asset
-        asset="css/customer-experience.css"
-        :type="Helix\Lego\Enums\AppAsset::STYLESHEET"
-        vendor="customer-experience"
-    />
-
     <div
         data-area="cx"
         class="{{ $this->css('cxBackground') }}"
