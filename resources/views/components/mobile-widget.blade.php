@@ -7,6 +7,10 @@
     $settings = app(CustomerExperienceSettings::class);
 @endphp
 
+@props([
+    'chatEnabled' => false,
+])
+
 @if($settings->enabled)
     @php
         $currentTime = Carbon::now('UTC');
@@ -20,22 +24,11 @@
             $chatClosingTime->addDay();
         }
 
-        $chatIsAvailable = $settings->chat_enabled
+        $chatIsAvailable = $chatEnabled
             && $chatToday->enabled
             && $currentTime->greaterThanOrEqualTo($chatOpeningTime)
             && $currentTime->lessThan($chatClosingTime);
     @endphp
-
-    <x-lego::app-asset
-        asset="js/customer-experience.js"
-        :type="Helix\Lego\Enums\AppAsset::SCRIPT"
-        vendor="customer-experience"
-    />
-    <x-lego::app-asset
-        asset="css/customer-experience.css"
-        :type="Helix\Lego\Enums\AppAsset::STYLESHEET"
-        vendor="customer-experience"
-    />
 
     <div
         data-area="cx"
@@ -57,7 +50,7 @@
             clientChatClosingTime = convertToClientTimezone('{{ $chatToday->closing_time_in_utc }}');
         })"
     >
-        @if($settings->chat_enabled)
+        @if($chatEnabled)
           <div class="flex items-center justify-between {{ $this->css('cxMobileButtonContainer') }}">
               <div class="flex items-center space-x-2 {{ $this->css('cxMobileButtonCta') }}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
