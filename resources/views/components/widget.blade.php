@@ -184,18 +184,21 @@
             </div>
         @endif
 
-        <div class="cx-flex cx-items-center cx-gap-6 cx-font-semibold cx-text-base {{ $this->css('cxFooter') }}">
-            @php
-                $enabledSupportLinks = SupportLink::where('enabled', true)->limit(2)->get();
-            @endphp
-            @foreach($enabledSupportLinks as $link)
-                <a
-                    href="{{ $link->link_url }}"
-                    class="cx-flex-1 cx-underline cx-capitalize {{ $loop->index == 0 ? 'cx-text-right ' : '' }} {{ $this->css('cxFooterLink') }} {{ count($enabledSupportLinks) === 1 ? 'cx-text-center' : '' }}"
-                >
-                    {{ $link->link_copy }}
-                </a>
-            @endforeach
-        </div>
+        @php
+            $enabledSupportLinks = SupportLink::where('enabled', true)->limit(2)->get();
+        @endphp
+
+        @if(empty($enabledSupportLinks))
+            <div class="cx-flex cx-items-center cx-gap-6 cx-font-semibold cx-text-base {{ $this->css('cxFooter') }}">
+                @foreach($enabledSupportLinks as $link)
+                    <a
+                        href="{{ $link->link_url }}"
+                        class="cx-flex-1 cx-underline cx-capitalize {{ $loop->index == 0 ? 'cx-text-right ' : '' }} {{ $this->css('cxFooterLink') }} {{ count($enabledSupportLinks) === 1 ? 'cx-text-center' : '' }}"
+                    >
+                        {{ $link->link_copy }}
+                    </a>
+                @endforeach
+            </div>
+        @endif
     </div>
 @endif
