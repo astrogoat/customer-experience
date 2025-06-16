@@ -188,7 +188,7 @@
             $enabledSupportLinks = SupportLink::where('enabled', true)->limit(2)->get();
         @endphp
 
-        @if(empty($enabledSupportLinks))
+        @if($enabledSupportLinks->isNotEmpty())
             <div class="cx-flex cx-items-center cx-gap-6 cx-font-semibold cx-text-base {{ $this->css('cxFooter') }}">
                 @foreach($enabledSupportLinks as $link)
                     <a
