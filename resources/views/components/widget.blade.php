@@ -50,26 +50,8 @@
     <div
         data-area="cx"
         class="{{ $this->css('cxBackground') }}"
-        x-data="{
-            clientTimezone: '',
-            clientTimezoneAbbreviation: '',
-            clientChatOpeningTime: '',
-            clientChatClosingTime: '',
-            clientCallOpeningTime: '',
-            clientCallClosingTime: '',
-            convertToClientTimezone(time) {
-                return dayjs.utc(time, 'HH:mm').tz(this.clientTimezone).format('h:mm A');
-            }
-        }"
-        x-init="$nextTick(() => {
-            clientTimezone = window.dayjs.tz.guess();
-            clientTimezoneAbbreviation = dayjs().tz(clientTimezone).format('z');
-
-            clientChatOpeningTime = convertToClientTimezone('{{ $chatToday->opening_time_in_utc }}');
-            clientChatClosingTime = convertToClientTimezone('{{ $chatToday->closing_time_in_utc }}');
-            clientCallOpeningTime = convertToClientTimezone('{{ $callToday->opening_time_in_utc }}');
-            clientCallClosingTime = convertToClientTimezone('{{ $callToday->closing_time_in_utc }}');
-        })"
+        x-data="cxData()"
+        x-init="initCx('{{ $chatToday->opening_time_in_utc }}', '{{ $chatToday->closing_time_in_utc }}')"
     >
         <div class="cx-flex cx-gap-2 {{ $this->css('cxHeaderContainer') }}">
             <div>
@@ -202,3 +184,25 @@
         @endif
     </div>
 @endif
+
+@push('footer')
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('cxData', () => ({
+                clientTimezone: '',
+                clientTimezoneAbbreviation: '',
+                clientChatOpeningTime: '',
+                clientChatClosingTime: '',
+                convertToClientTimezone(time) {
+                    return dayjs.utc(time, 'HH:mm').tz(this.clientTimezone).format('h:mm A');
+                },
+                initCx(openingTime, closingTime) {
+                    this.clientTimezone = window.dayjs.tz.guess();
+                    this.clientTimezoneAbbreviation = dayjs().tz(this.clientTimezone).format('z');
+                    this.clientChatOpeningTime = this.convertToClientTimezone(openingTime);
+                    this.clientChatClosingTime = this.convertToClientTimezone(closingTime);
+                },
+            }));
+        });
+    </script>
+@endpush
