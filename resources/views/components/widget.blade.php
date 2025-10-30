@@ -89,7 +89,7 @@
                                         </div>
                                         <div class="cx--mt-[3px] cx-text-xs cx-font-normal {{ $this->css('cxTimeZoneText') }}">
                                             <span
-                                                x-text="clientChatOpeningTime + ' - ' + clientChatClosingTime + ' ' + clientTimezoneAbbreviation"
+                                                x-text="this.clientChatOpeningTime + ' - ' + this.clientChatClosingTime + ' ' + this.clientTimezoneAbbreviation"
                                             ></span>
                                         </div>
                                     </div>
@@ -121,7 +121,7 @@
                                         </div>
                                         <div class="cx--mt-[3px] cx-text-xs cx-font-normal {{ $this->css('cxTimeZoneText') }}">
                                             <span
-                                                x-text="clientCallOpeningTime + ' - ' + clientCallClosingTime + ' ' + clientTimezoneAbbreviation"
+                                                x-text="this.clientCallOpeningTime + ' - ' + this.clientCallClosingTime + ' ' + this.clientTimezoneAbbreviation"
                                             ></span>
                                         </div>
                                     </div>
