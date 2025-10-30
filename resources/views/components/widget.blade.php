@@ -193,14 +193,18 @@
                 clientTimezoneAbbreviation: '',
                 clientChatOpeningTime: '',
                 clientChatClosingTime: '',
+                clientCallOpeningTime: '',
+                clientCallClosingTime: '',
                 convertToClientTimezone(time) {
                     return dayjs.utc(time, 'HH:mm').tz(this.clientTimezone).format('h:mm A');
                 },
-                initCx(openingTime, closingTime) {
+                initCx(chatOpeningTime, chatClosingTime, callOpeningTime, callClosingTime) {
                     this.clientTimezone = window.dayjs.tz.guess();
                     this.clientTimezoneAbbreviation = dayjs().tz(this.clientTimezone).format('z');
-                    this.clientChatOpeningTime = this.convertToClientTimezone(openingTime);
-                    this.clientChatClosingTime = this.convertToClientTimezone(closingTime);
+                    this.clientChatOpeningTime = this.convertToClientTimezone(chatOpeningTime);
+                    this.clientChatClosingTime = this.convertToClientTimezone(chatClosingTime);
+                    this.clientCallOpeningTime = this.convertToClientTimezone(callOpeningTime);
+                    this.clientCallClosingTime = this.convertToClientTimezone(callClosingTime);
                 },
             }));
         });
