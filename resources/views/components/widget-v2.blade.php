@@ -145,19 +145,19 @@
             <div class="{{ $this->css('cxFaqBackground') }}">
                 <div class="{{ $this->css('cxFaqDivider') }}">
                     @foreach(\Astrogoat\CustomerExperience\Models\Faq::all() as $faq)
-                        <details class="cx-group cx-w-full cx-group cx-px-4 {{ $this->css('cxFaqText') }}">
+                        <details class="cx-group cx-w-full cx-px-4 {{ $this->css('cxFaqText') }}">
                             <summary class="cx-w-full cx-flex cx-gap-2 cx-cursor-pointer cx-list-none cx-items-center cx-py-4 cx-text-sm cx-font-semibold">
                                 <div class="cx-w-full cx-flex cx-gap-3 cx-justify-between cx-items-center {{ $this->css('cxFaqTitleAndChevron') }}">
                                     <div class="{{ $this->css('cxFaqTitle') }}">
                                         {{ $faq->faq_question }}
                                     </div>
-                                    <div class="cx-flex cx-justify-end cx-items-center cx-transition-all cx-duration-300 group-open:cx-rotate-45 {{ $this->css('cxFaqChevron') }}">
+                                    <div class="cx-flex cx-justify-end cx-items-center {{ $this->css('cxFaqChevron') }}">
                                         <x-dynamic-component component="{{ $this->resources('cxFaqChevron') }}" class="h-2"/>
                                     </div>
                                 </div>
                             </summary>
                             <div>
-                                <div class="cx-transition-all cx-ease-in-out cx-delay-150 cx-pb-4 cx-text-sm cx-font-normal">
+                                <div class="cx-transition-all cx-ease-in-out cx-delay-150 cx-pb-4 cx-text-sm cx-font-normal {{ $this->css('cxFaqAnswer') }}">
                                     <p>
                                         {!! $faq->faq_answer !!}
                                     </p>
