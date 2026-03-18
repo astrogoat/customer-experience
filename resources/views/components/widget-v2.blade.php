@@ -49,7 +49,7 @@
 
     <div
         data-area="cx"
-        class="{{ $this->css('cxBackground') }}"
+        class="BB-CXWidget {{ $this->css('cxBackground') }}"
         x-data="{
             clientTimezone: '',
             clientTimezoneAbbreviation: '',
@@ -76,11 +76,11 @@
                 <div class="cx-flex cx-gap-2 {{ $this->css('cxHeaderContainer') }}">
                     <div class="cx-w-full cx-flex cx-justify-between cx-text-base cx-leading-6 cx-font-semibold {{ $this->css('cxHeaderContentArea') }}">
                         <div class="cx-flex cx-items-center cx-gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M7.62891 5.26884C8.80048 4.24372 10.7 4.24372 11.8715 5.26884C13.0431 6.29397 13.0431 7.95603 11.8715 8.98116C11.6676 9.15958 11.4417 9.30695 11.2013 9.42326C10.4556 9.78415 9.75023 10.4216 9.75023 11.25V12M18.75 9.75C18.75 14.7206 14.7206 18.75 9.75 18.75C4.77944 18.75 0.75 14.7206 0.75 9.75C0.75 4.77944 4.77944 0.75 9.75 0.75C14.7206 0.75 18.75 4.77944 18.75 9.75ZM9.75 15H9.7575V15.0075H9.75V15Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg class="{{ $this->css('cxV2QuestionMarkIcon') }}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M7.62891 5.26884C8.80048 4.24372 10.7 4.24372 11.8715 5.26884C13.0431 6.29397 13.0431 7.95603 11.8715 8.98116C11.6676 9.15958 11.4417 9.30695 11.2013 9.42326C10.4556 9.78415 9.75023 10.4216 9.75023 11.25V12M18.75 9.75C18.75 14.7206 14.7206 18.75 9.75 18.75C4.77944 18.75 0.75 14.7206 0.75 9.75C0.75 4.77944 4.77944 0.75 9.75 0.75C14.7206 0.75 18.75 4.77944 18.75 9.75ZM9.75 15H9.7575V15.0075H9.75V15Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
 
-                            <span class="{{ $this->css('cxMobileHeaderTitle') }}" >Have questions?</span>
+                            <span class="{{ $this->css('cxMobileHeaderTitle') }}">Have questions?</span>
                         </div>
 
                         @if($chatEnabled)
@@ -88,7 +88,7 @@
                                 data-area="chat-now"
                                 x-on:click="{{ $settings->chat_button_action }}"
                                 type="button"
-                                class="cx-text-sm cx-font-normal cx-leading-6 cx-transition-colors cx-ease-in-out cx-duration {{ $chatIsAvailable ?  $this->css('cxV2MobileButton') : ' cx-bg-opacity-20 ' . $this->css('cxButtonDisabled') }}"
+                                class="cx-text-sm cx-font-normal cx-leading-6 cx-transition-colors cx-ease-in-out cx-duration {{ $chatIsAvailable ?  $this->css('cxV2MobileButton') : ' cx-bg-opacity-20 ' . $this->css('cxV2ButtonDisabled') }}"
                                 aria-label="chat-now"
                                 {{ $chatIsAvailable ? '' : 'disabled' }}
                             >
