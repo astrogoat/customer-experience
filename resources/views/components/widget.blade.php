@@ -77,10 +77,10 @@
             </div>
             <div class="cx-w-full cx-flex cx-flex-col cx-text-base cx-leading-6 cx-font-semibold {{ $this->css('cxHeaderContentArea') }}">
                 <span>Have questions?</span>
-                <span>Chat with a Sleep Expert</span>
+                <span>Chat with a Sleep Specialist</span>
                 <div>
                     <div class="cx-mt-1 cx-text-sm cx-font-normal {{ $this->css('cxHeaderDescription') }}">
-                        Our Sleep Experts will help you feel confident in your mattress choice!
+                        Our Sleep Specialists will help you feel confident in your mattress choice!
                     </div>
                     <div class="cx-mt-4 cx-flex cx-gap-4 {{ $this->css('cxHeaderCtas') }}">
                         @if($chatEnabled)
