@@ -102,10 +102,10 @@
             <div class="cx-flex cx-gap-2 {{ $this->css('cxHeaderContainer') }}">
                 <div class="cx-w-full cx-flex cx-flex-col cx-text-base cx-leading-6 cx-font-semibold {{ $this->css('cxHeaderContentArea') }}">
                     <span class="{{ $this->css('cxHeaderTitle') }}" >Have questions?</span>
-                    <span class="md:hidden {{ $this->css('cxHeaderSubtitle') }}">Chat with a Sleep Expert</span>
+                    <span class="md:hidden {{ $this->css('cxHeaderSubtitle') }}">Chat with a Sleep Specialist</span>
                     <div>
                         <div class="cx-text-sm cx-font-normal {{ $this->css('cxHeaderDescription') }}">
-                            Our Sleep Experts will help you feel confident in your mattress choice!
+                            Our Sleep Specialists will help you feel confident in your mattress choice!
                         </div>
                         <div class="cx-flex cx-gap-4 {{ $this->css('cxHeaderCtas') }}">
                             @if($chatEnabled)
